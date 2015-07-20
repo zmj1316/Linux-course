@@ -5,4 +5,4 @@
 # Modified:	
 # Purpose:	To count the number of normal directory and excuteble files, 
 # and the number of bytes under given directory which is passed in through argument.
-# Brief Description:	
+# Brief Description:	Use build-in commands
