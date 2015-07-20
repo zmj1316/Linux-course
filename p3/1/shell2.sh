@@ -1,5 +1,5 @@
 #!/bin/bash
-# File Name:	shell1.sh
+# File Name:	shell2.sh
 # Author:	Key Zhang
 # Written:	7-20-2015
 # Modified:	
