@@ -1,30 +1,83 @@
 #!/bin/bash
-# File Name:	shell1.sh
+# File Name:	data.sh
 # Author:	Key Zhang
-# Written:	7-17-2015
+# Written:	7-20-2015
 # Purpose:  Data store function
 table="test.db"
 key="testkey"
 value="testv"
-if [[ -n $1 ]]; then
-    table=$1
-fi
-if [[ -n $2 ]]; then
-    key=$2
-fi
-if [[ -n $3 ]]; then
-    value=$3
-fi
-if [[ -e $table ]]; then
-    echo "OK"
-else
-    echo "New Table!"
-    touch $table
-fi
-res=$(grep "\<$key\>" $table|cut -d'>' -f2|cut -d'<' -f1)
-if [[  ${#res}>1 ]]; then
-    echo "found: $res"
-else
-    echo "<$key>$value<\\$key>"|cat >>$table
-    echo "Written: <$key>$value<\\$key>"
-fi
+
+#dataselect <table name> <key> 
+function dataselect() 
+{
+    #get table name
+    if [[ -n $1 ]]; then
+        table=$1
+    fi
+    #key
+    if [[ -n $2 ]]; then
+        key=$2
+    fi
+    #get value
+    res=$(grep "\<$key\>" $table|cut -d'>' -f2|cut -d'<' -f1)
+    #check value
+    if [[  ${#res}>1 ]]; then
+        echo "$res"
+        return 0
+    else
+        return 1
+    fi
+}
+
+#datainsert <table name> <key> <value>
+function datainsert()
+{
+    #get table name
+    if [[ -n $1 ]]; then
+        table=$1
+    fi
+    #get key
+    if [[ -n $2 ]]; then
+        key=$2
+    fi
+    #get value
+    if [[ -n $3 ]]; then
+        value=$3
+    fi
+    res=$(grep "\<$key\>" $table|cut -d'>' -f2|cut -d'<' -f1)
+    if [[  ${#res}>1 ]]; then
+        return 1
+    else
+        #write record
+        echo "<$key>$value<>"|cat >>$table
+        #echo "Written: <$key>$value<>"
+        return 0
+    fi
+}
+
+#dataupdate <table name> <key> <value>
+function dataupdate()
+{
+    if [[ -n $1 ]]; then
+        table=$1
+    fi
+    if [[ -n $2 ]]; then
+        key=$2
+    fi
+    if [[ -n $3 ]]; then
+        value=$3
+    fi
+    res=$(grep "\<$key\>" $table);
+    if [[  ${#res}>1 ]]; then
+        #replace record
+        sed -i "s/$res/<$key>$value<>/" $table
+        return 0;
+    else
+        #No matching record
+        return 1;
+    fi
+}
+
+
+datainsert $table insertkey insertv2
+dataselect $table insertkey

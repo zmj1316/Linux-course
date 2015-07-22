@@ -1,2 +1,3 @@
-<testkey>testv<\testkey>
-<key2>v2<\key2>
+<testkey>testv<>
+<key2>update<>
+<insertkey>insertv<>
