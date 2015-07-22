@@ -21,9 +21,8 @@ function dataselect()
     #get value
     res=$(grep "\<$key\>" $table|cut -d'>' -f2|cut -d'<' -f1)
     #check value
-    if [[  ${#res}>1 ]]; then
-        echo "$res"
-        return 0
+    if [[  $res ]]; then
+        echo $res
     else
         return 1
     fi
@@ -68,6 +67,7 @@ function dataupdate()
         value=$3
     fi
     res=$(grep "\<$key\>" $table);
+    echo $res
     if [[  ${#res}>1 ]]; then
         #replace record
         sed -i "s/$res/<$key>$value<>/" $table
@@ -77,7 +77,7 @@ function dataupdate()
         return 1;
     fi
 }
-
-
-datainsert $table insertkey insertv2
-dataselect $table insertkey
+# U="USER.db"
+# id="3"
+# dataselect $U ${id}"_TYPE"
+# dataupdate $U ${id}"_NO" 333
