@@ -1,12 +1,10 @@
 #!/bin/bash
-# File Name:	data.sh
+# File Name:	orm.sh
 # Author:	Key Zhang
-# Written:	7-20-2015
-# Purpose:  Data store function
-table="test.db"
-key="testkey"
-value="testv"
+# Written:	7-22-2015
+# Purpose:  orm function
 
+####data store function:
 #dataselect <table name> <key> 
 function dataselect() 
 {
@@ -78,6 +76,4 @@ function dataupdate()
     fi
 }
 
-
-datainsert $table insertkey insertv2
-dataselect $table insertkey
+###ORM part
