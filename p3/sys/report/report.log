@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.15)  20 JUL 2015 16:04
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2015.4.15)  22 JUL 2015 10:19
 entering extended mode
 **F:/Workspace/Linux-course/p3/sys/report/report.tex
 (F:/Workspace/Linux-course/p3/sys/report/report.tex
@@ -262,70 +262,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 54--56
 
 ]
 章节 3.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 73.
-(C:\CTEX\MiKTeX\tex\latex\base\omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 73.
- (C:\CTEX\UserData\tex\latex\listings\lstlang1.sty
-File: lstlang1.sty 2014/09/06 1.5e listings language file
-) [5
+[5
 
 ]
-Overfull \hbox (39.0039pt too wide) in paragraph at lines 102--103
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (27.00378pt too wide) in paragraph at lines 110--111
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (57.00409pt too wide) in paragraph at lines 111--112
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[6] [7]
 章节 4.
-LaTeX Font Info:    Try loading font information for OT1+consolas on input line 140.
-LaTeX Font Info:    No file OT1consolas.fd. on input line 140.
+[6
 
-LaTeX Font Warning: Font shape `OT1/consolas/m/n' undefined
-(Font)              using `OT1/cmr/m/n' instead on input line 140.
-
-[8
-
-] (F:\Workspace\Linux-course\p3\sys\report\report.aux)
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
- ) 
+] (F:\Workspace\Linux-course\p3\sys\report\report.aux) ) 
 Here is how much of TeX's memory you used:
- 4822 strings out of 495354
- 63879 string characters out of 3183859
- 156943 words of memory out of 3000000
- 7901 multiletter control sequences out of 15000+200000
- 47115 words of font info for 161 fonts, out of 3000000 for 9000
+ 4371 strings out of 495354
+ 57376 string characters out of 3183859
+ 144172 words of memory out of 3000000
+ 7465 multiletter control sequences out of 15000+200000
+ 40661 words of font info for 139 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 27i,8n,49p,540b,1208s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei
-.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/sim
-hei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/
-simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fon
-ts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/
-Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windo
-ws/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/wi
-ndows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:
-/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf>
-<C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.p
-fb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/CTEX/MiKTeX/fonts/typ
-e1/public/amsfonts/cm/cmr6.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb
->
-Output written on report.pdf (8 pages, 328381 bytes).
+ 27i,6n,49p,363b,380s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf
+><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.
+ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simh
+ei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/s
+imhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Font
+s/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/F
+onts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/window
+s/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/win
+dows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/windows/Fonts/simhei.ttf><C:/CTEX/MiKTeX/fonts/type1/publi
+c/amsfonts/cm/cmbx10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
+:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on report.pdf (6 pages, 241385 bytes).
 PDF statistics:
- 329 PDF objects out of 1000 (max. 8388607)
+ 277 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

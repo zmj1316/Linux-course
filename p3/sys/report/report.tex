@@ -60,7 +60,7 @@
 \chapter{设计思路}
 \paragraph{}总体采用MVC设计模式，将模型、视图用控制器连接减少耦合，方便扩展修改。
 \section{数据模型}
-\paragraph{}由于要求采用文件存储，不能使用数据库，所以需要新建一套数据存储体系。初步考虑采用类xml的方法结合正则表达式来处理。采用k-v的形式存储数据，单表作为一个文件，文件名为表名。
+\paragraph{}由于要求采用文件存储，不能使用数据库，所以需要新建一套数据存储体系。初步考虑采用类xml的方法结合正则表达式来处理。采用k-v的形式存储数据，单表作为一个文件，文件名为表名。并且实现简单的ORM。
 \section{控制器}
 \paragraph{}
 \section{视图}
@@ -68,6 +68,14 @@
 
 \chapter{详细设计}
 \section{数据模型部分}
+\paragraph{}数据库操作包括在$data.sh$和$orm.sh$中，主要包括了：
+\begin{description}
+    \item [用户] id 类型 工号/学号 姓名 PASSWD
+    \item [课程] id 教师id 名称
+    \item [作业] id 课程id 名称
+    \item [学生-作业关系] id 学生id 作业id 完成情况
+\end{description}
+\paragraph{}为了满足ORM中主键自增的特性，每张k-v表需要自带一个int记录用于生成自增的主键
 
 \chapter{其他}
 \section{开发小结}

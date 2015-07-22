@@ -10,27 +10,10 @@
 \contentsline {section}{\numberline {2.3}视图}{4}
 \contentsline {paragraph}{}{4}
 \contentsline {chapter}{\numberline {3}详细设计}{5}
-\contentsline {section}{\numberline {3.1}数据库模型部分}{5}
+\contentsline {section}{\numberline {3.1}数据模型部分}{5}
 \contentsline {paragraph}{}{5}
 \contentsline {paragraph}{}{5}
-\contentsline {subsection}{\numberline {3.1.1}实例类}{6}
+\contentsline {chapter}{\numberline {4}其他}{6}
+\contentsline {section}{\numberline {4.1}开发小结}{6}
+\contentsline {subsection}{\numberline {4.1.1}版本控制}{6}
 \contentsline {paragraph}{}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {subsection}{\numberline {3.1.2}模型类}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {section}{\numberline {3.2}控制器部分}{6}
-\contentsline {paragraph}{}{6}
-\contentsline {section}{\numberline {3.3}视图}{7}
-\contentsline {paragraph}{}{7}
-\contentsline {paragraph}{}{7}
-\contentsline {chapter}{\numberline {4}其他}{8}
-\contentsline {section}{\numberline {4.1}开发小结}{8}
-\contentsline {subsection}{\numberline {4.1.1}版本控制}{8}
-\contentsline {paragraph}{}{8}
-\contentsline {subsection}{\numberline {4.1.2}重构}{8}
-\contentsline {paragraph}{}{8}
-\contentsline {subsection}{\numberline {4.1.3}内存泄漏}{8}
-\contentsline {paragraph}{}{8}
-\contentsline {paragraph}{}{8}
