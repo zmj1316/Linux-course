@@ -67,8 +67,7 @@ function dataupdate()
         value=$3
     fi
     res=$(grep "\<$key\>" $table);
-    echo $res
-    if [[  ${#res}>1 ]]; then
+    if [[  $res ]]; then
         #replace record
         sed -i "s/$res/<$key>$value<>/" $table
         return 0;
@@ -77,7 +76,30 @@ function dataupdate()
         return 1;
     fi
 }
-# U="USER.db"
+
+#datadelete table key 
+function datadelete()
+{
+    if [[ -n $1 ]]; then
+        table=$1
+    fi
+    if [[ -n $2 ]]; then
+        key=$2
+    fi
+    res=$(grep "\<$key\>" $table);
+    if [[  $res ]]; then
+        #replace record
+        sed -i "/$res/d" $table
+        return 0;
+    else
+        #No matching record
+        return 1;
+    fi
+}
+
+#test
+U="USER.db"
+datadelete $U ID
 # id="3"
 # dataselect $U ${id}"_TYPE"
 # dataupdate $U ${id}"_NO" 333
