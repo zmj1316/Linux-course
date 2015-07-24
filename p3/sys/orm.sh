@@ -179,10 +179,12 @@ function USER_delete()
 function USER_getbyid()
 {
     id=$1
+    #query the data
     TYPE=`dataselect $U ${id}"_TYPE"`
     NO=`dataselect $U ${id}"_NO"`
     NAME=`dataselect $U ${id}"_NAME"`
     PASS=`dataselect $U ${id}"_PASS"`
+    #fold the object
     echo ${id}"_"${TYPE}"_"${NO}"_"${NAME}"_"${PASS}
 }
 
@@ -207,7 +209,7 @@ C="COURSE.db"
 #COURSE_new <COURSE_OBJECT>
 function COURSE_new()
 {
-        #get the autoicreasing primarykey 
+    #get the autoicreasing primarykey 
     id=`dataselect $C ID`
     #set id
     id=$((id + 1))
@@ -247,6 +249,7 @@ function COURSE_delete()
 function COURSE_getbyid()
 {
     id=$1
+    #query the db
     uid=`dataselect $C ${id}"_uid"`
     NAME=`dataselect $C ${id}"_NAME"`
     #TODO return with USER_OBJECT
@@ -314,14 +317,14 @@ function WORK_getbyid()
 
 
 ##RELATION MODEL
-#RELATION:   id_uid_wid_STAT
-#                       STAT: 0 Not done
-#                             1 Done
+#ST-WORK RELATION:   id_uid_wid_STAT
+#                               STAT: 0 Not done
+#                                     1 Done
 
-R="RELATION.db"
+R="S-W.db"
 
 #RELA_new <RELA_OBJECT>
-function RELA_new()
+function SW_new()
 {
     #get the autoicreasing primarykey 
     id=`dataselect $R ID`
@@ -340,7 +343,7 @@ function RELA_new()
 }
 
 #RELA_update <RELA_OBJECT>
-function RELA_update()
+function SW_update()
 {
     #unfold the object
     id=`echo $1|cut -d'_' -f1`
@@ -353,15 +356,63 @@ function RELA_update()
     dataupdate $R ${id}"_STAT" $STAT
 }
 
-function RELA_getbyid()
+function SW_getbyid()
 {
     id=$1
+    #query the db
     uid=`dataselect $R ${id}"_uid"`
     wid=`dataselect $R ${id}"_wid"`
     STAT=`dataselect $R ${id}"_STAT"`
-    
     echo ${id}"_"${uid}"_"${wid}"_"${STAT}
 }
+
+#USER-COURSE RELATION:   id_uid_cid
+
+
+UC="U-C.db"
+
+#RELA_new <RELA_OBJECT>
+function UC_new()
+{
+    #get the autoicreasing primarykey 
+    id=`dataselect $UC ID`
+    #set id
+    id=$((id + 1))
+    #insrease id
+    dataupdate $UC ID $id
+    #unfold the object
+    uid=`echo $1|cut -d'_' -f2`
+    cid=`echo $1|cut -d'_' -f3`
+    #insert into table
+    datainsert $UC ${id}"_uid" $uid
+    datainsert $UC ${id}"_cid" $cid
+}
+
+#RELA_update <RELA_OBJECT>
+function UC_update()
+{
+    #unfold the object
+    id=`echo $1|cut -d'_' -f1`
+    uid=`echo $1|cut -d'_' -f2`
+    cid=`echo $1|cut -d'_' -f3`
+    #update into table
+    dataupdate $UC ${id}"_uid" $uid
+    dataupdate $UC ${id}"_cid" $cid
+}
+
+function UC_getbyid()
+{
+    id=$1
+    #query the db
+    uid=`dataselect $UC ${id}"_uid"`
+    wid=`dataselect $UC ${id}"_cid"`
+    echo ${id}"_"${uid}"_"${cid}
+}
+
+
+
+
+
 
 ###unit test:
 `./initdb.sh`
