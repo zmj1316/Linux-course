@@ -41,9 +41,9 @@ function view_login()
 }
 
 #USER manage view
-#user_manage <USER_array> [errormsg]
+#user_list <USER_array> [errormsg]
 #return OP 
-function view_user_manage()
+function view_user_list()
 {
     clear
     local temp=($1)
@@ -144,10 +144,31 @@ function view_user_edit()
     EDITEDUSER=`USER_fold`
 }
 
+#user delete <Usser OBJECT
 function view_user_delete()
 {
-    echo
+    echo "Are you sure to delete the following user?"
+    USER_unfold $i
+    #explain the TYPE
+    case $TYPE in
+        0)TYPE="SU"
+            ;;
+        1)TYPE="TE"
+            ;;
+        2)TYPE="ST"
+            ;;
+    esac
+    printf "%-4s%-5s%-10s%-15s\n" $id $TYPE $NO $NAME
+    read -p "Enter [Y/N]" RES
 }
+
+##COURSE VIEW
+#course list
+function view_course_list()
+{
+    
+}
+
 ##test
 # a[0]="1_0_root_root"
 # a[1]="2_1_010_teacher"
