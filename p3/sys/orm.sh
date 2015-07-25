@@ -465,4 +465,4 @@ function UC_getbyid()
 
 
 ##relation test
-USER_getbyid 4
+# USER_getbyid 4

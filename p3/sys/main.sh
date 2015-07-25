@@ -9,21 +9,29 @@
 CUSER=""
 STATE="Login"
 
+#USer login [msg]
 function Login()
 {
+    #call view
     view_login $1
+    #get user
     CUSER=`USER_getbyNO $NO`
     USER_unfold $CUSER
+    #check password
     if [[ $CUSER && $PASS = $iPASS ]]; then
+        #goto index manu
         STATE="Index"
         return
     fi
     clear
+    #passwd not match or user not exist
     Login Incorrect!
 }
 
+#index user manu
 function Index()
 {
+    #call view
     view_index $CUSER $1
     case $RES in
         "0_1") STATE="USER_manage"
@@ -43,9 +51,12 @@ function Index()
     esac
 }
 
+#USER manage 
 function USER_manage()
 {
+    #get the number of users
     maxid=`dataselect $U ID`
+    #query db
     local array
     local j=0
     for (( i = 0; i <= $maxid; i++ )); do
@@ -55,7 +66,9 @@ function USER_manage()
             j=$((j+1))
         fi
     done
+    #call view
     view_user_list "${array[*]}"
+    #selection
     case $OP in
         1)
         #new user
@@ -76,6 +89,7 @@ function USER_manage()
         view_user_target
         target=`USER_getbyNO $NO`
         view_user_delete $target
+        #comfirm
         if [[ $RES = "Y" ]]; then
             USER_unfold $target
             USER_delete $id
@@ -85,16 +99,20 @@ function USER_manage()
         fi
             ;;
         *)
+        #other choice
           view_user_list "$1" "NO Such Choice!"
           ;;
     esac
+    #go back
     STATE="Index"
 }
 
+#course manage 
 function COURSE_manage()
 {
+    #get the number of courses
     maxid=`dataselect $C ID`
-    echo $maxid
+    #query db
     local array
     local j=0
     for (( i = 0; i <= $maxid; i++ )); do
@@ -104,7 +122,9 @@ function COURSE_manage()
             j=$((j+1))
         fi
     done
+    #call view
     view_course_list "${array[*]}"
+    #selection
     case $OP in
         1)
         #add course
@@ -138,10 +158,10 @@ function COURSE_manage()
           view_course_list "$1" "NO Such Choice!"
           ;;
     esac
-    # STATE="Index"
+    STATE="Index"
 }
 
-
+#Run
 while [[ 1 ]]; do
     eval $STATE
 done

@@ -63,14 +63,16 @@ function view_login()
 function view_index()
 {
     clear
+    #display message
     if [[ $2 ]]; then
         echo -e "\033[41;37m$2\033[0m"
     fi
+    #get TYPE from USER object
     USER_unfold $1
     echo "options:"
     case $TYPE in
         0)
-        #SU manu
+        #SU menu
         echo -e "\t1:USER manage"
         echo -e "\t2:Course manage"
             ;;
@@ -88,6 +90,7 @@ function view_index()
         return
             ;;
     esac
+    #get selection
     read -p "  input: " CMD
     RES=$TYPE"_"$CMD
 }
@@ -101,7 +104,7 @@ function view_user_list()
 {
     clear
     local temp=($1)
-    #Error message
+    #display message
     if [[ $2 ]]; then
         echo -e "\033[41;37m$2\033[0m"
     fi
@@ -109,7 +112,7 @@ function view_user_list()
     printf "%-4s%-5s%-10s%-15s\n" id TYPE LOGINNAME NAME
     for i in ${temp[@]} ; do
         USER_unfold $i
-        #explain the TYPE
+        #translate the TYPE
         case $TYPE in
             0)TYPE="SU"
                 ;;
@@ -122,35 +125,23 @@ function view_user_list()
     done
     echo
     echo
-    #read operation
+    # read operation
     echo "operations:"
     echo -e "\t1:Add User"
     echo -e "\t2:Edit User"
     echo -e "\t3:Delete User"
     read -p "Please select:" OP
-    # case $OP in
-    #     1)view_user_new
-    #     #new user
-    #         ;;
-    #     2)view_user_edit
-    #     #Edit user
-    #         ;;
-    #     3)view_user_delete
-    #     #Delete User
-    #         ;;
-    #     *)
-    #       view_user_manage "$1" "NO Such Choice!"
-    #       ;;
-    # esac
 }
 #create user 
 #view_user_new [err msg]
 function view_user_new()
 {
+    #display message
     if [[ $1 ]]; then
         echo -e "\033[41;37m$1\033[0m"
     fi
     echo "Now create new user: "
+    #USER TYPE
     read -p "TYPE [0:SU][1:TE][2:ST] : " TYPE
     case $TYPE in
         0)TYPE=0
@@ -160,7 +151,7 @@ function view_user_new()
         2)TYPE=2
             ;;
         *)
-        #TYPE out of raange
+        #TYPE out of range
         view_user_new "TYPE Error!"
             return
             ;;
@@ -169,6 +160,7 @@ function view_user_new()
     read -p "NAME: " NAME
     read -p "PASSWORD: " PASS1
     read -p "Type again: " PASS2
+    #check the passwd
     if [[ ! $PASS1 = $PASS2 ]]; then
         view_user_new "Type password again!"
         return 
@@ -178,7 +170,7 @@ function view_user_new()
     NEWUSER=`USER_fold`
 }
 
-#get the target NO
+#get the target user NO
 function view_user_target()
 {
     echo  "Please input the LOGINNAME of the target:"
@@ -202,8 +194,8 @@ function view_user_edit()
 function view_user_delete()
 {
     echo "Are you sure to delete the following user?"
-    USER_unfold $1
-    #explain the TYPE
+    USER_unfold $1s
+    #translate the TYPE
     case $TYPE in
         0)TYPE="SU"
             ;;
@@ -245,6 +237,7 @@ function view_course_list()
 #view_course_new [err msg]
 function view_course_new()
 {
+    #display message
     if [[ $1 ]]; then
         echo -e "\033[41;37m$1\033[0m"
     fi
@@ -264,7 +257,7 @@ function view_course_target()
 #edit course <course object> [msg]
 function view_course_edit()
 {
-    #Error message
+    #display message
     if [[ $2 ]]; then
         echo -e "\033[41;37m$2\033[0m"
     fi
