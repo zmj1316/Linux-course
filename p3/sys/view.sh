@@ -224,6 +224,11 @@ function view_course_list()
         COURSE_unfold $i
         printf "%-4s%-15s%-15s%-10s\n" $id $NAME $TNO $TNAME
     done
+
+}
+
+function view_course_list_manage()
+{
     echo
     echo
     #read operation
@@ -233,7 +238,13 @@ function view_course_list()
     echo -e "\t3:Delete Course"
     read -p "Please select:" OP
 }
-
+function view_course_list_student()
+{
+    echo
+    echo
+    #read operation
+    read -p "Type the id of the course to edit" CID
+}
 #view_course_new [err msg]
 function view_course_new()
 {

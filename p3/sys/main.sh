@@ -124,6 +124,7 @@ function COURSE_manage()
     done
     #call view
     view_course_list "${array[*]}"
+    view_course_list_manage
     #selection
     case $OP in
         1)
@@ -160,6 +161,31 @@ function COURSE_manage()
     esac
     STATE="Index"
 }
+
+function Student_manage()
+{
+    #get the number of courses
+    maxid=`dataselect $C ID`
+    #query db
+    local array
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`COURSE_getbyid $i`
+        COURSE_unfold $temp
+        USER_unfold $CUSER
+        if [[ $temp && $uid=$id ]]; then
+            array[$j]=$temp
+            j=$((j+1))
+        fi
+    done
+    #call view
+    view_course_list "${array[*]}"
+    view_course_list_student
+    
+}
+
+
+
 
 #Run
 while [[ 1 ]]; do
