@@ -185,7 +185,12 @@ function USER_getbyid()
     NAME=`dataselect $U ${id}"_NAME"`
     PASS=`dataselect $U ${id}"_PASS"`
     #fold the object
-    echo ${id}"_"${TYPE}"_"${NO}"_"${NAME}"_"${PASS}
+    if [[ $TYPE && $NO && $NAME && $PASS ]]; then
+        echo ${id}"_"${TYPE}"_"${NO}"_"${NAME}"_"${PASS}
+    else
+        echo ""
+    fi
+    
 }
 
 #USER_getbyNO <NO>
@@ -252,8 +257,14 @@ function COURSE_getbyid()
     #query the db
     uid=`dataselect $C ${id}"_uid"`
     NAME=`dataselect $C ${id}"_NAME"`
-    #TODO return with USER_OBJECT
-    echo ${id}"_"${uid}"_"${NAME}
+    #attach teacher object
+    teacher=`USER_getbyid $uid`
+    if [[ $uid && $NAME && $teacher ]]; then
+        echo ${id}"_"${uid}"_"${NAME}"_"${teacher}
+    else
+        echo ""
+    fi
+    
 }
 
 ##
@@ -414,51 +425,44 @@ function UC_getbyid()
 
 
 
-###unit test:
-`./initdb.sh`
+# ###unit test:
+# `./initdb.sh`
 
-U_SU="0_0_000_root_root"
-U_TE="0_1_010_teather_teacher"
-U_ST="0_2_100_stu_student"
+# U_SU="0_0_000_root_root"
+# U_TE="0_1_010_teather_teacher"
+# U_ST="0_2_100_stu_student"
 
-USER_new $U_SU
-USER_new $U_TE
-USER_new $U_ST
+# USER_new $U_SU
+# USER_new $U_TE
+# USER_new $U_ST
 
-USER_getbyNO 010
-temp=`USER_getbyid 3`
-temp=${temp}"s"
-USER_update $temp
-USER_delete 1
+# USER_getbyNO 010
+# temp=`USER_getbyid 3`
+# temp=${temp}"s"
+# USER_update $temp
+# USER_delete 1
 
-C_1="0_2_Linux"
-C_2="0_2_OOP"
+# C_1="0_2_Linux"
+# C_2="0_2_OOP"
 
-COURSE_new $C_1
-COURSE_new $C_2
+# COURSE_new $C_1
+# COURSE_new $C_2
 
-COURSE_getbyid 1
-temp=`COURSE_getbyid 1`
-temp=${temp}"-is-fun"
-COURSE_update $temp
-COURSE_delete 1
+# COURSE_getbyid 1
+# temp=`COURSE_getbyid 1`
+# temp=${temp}"-is-fun"
+# COURSE_update $temp
+# COURSE_delete 1
 
-W_1="0_1_shell"
+# W_1="0_1_shell"
 
-WORK_new $W_1
+# WORK_new $W_1
 
-temp=`WORK_getbyid 1`
-temp=${temp}"-program"
-WORK_update $temp
-WORK_delete 1
+# temp=`WORK_getbyid 1`
+# temp=${temp}"-program"
+# WORK_update $temp
+# WORK_delete 1
 
 
 ##relation test
-R_1="0_3_1_0"
-RELA_new $R_1
-temp=`RELA_getbyid 1`
-echo $temp
-temp=${temp}"1"
-RELA_update $temp
-echo $temp
-RELA_getbyid 1
+USER_getbyid 4
