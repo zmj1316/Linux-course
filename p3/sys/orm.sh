@@ -426,6 +426,7 @@ function UC_delete()
     datadelete $UC ${id}"_cid" $cid
 }
 
+#UC_getbyid <UC_id>
 function UC_getbyid()
 {
     id=$1
@@ -441,11 +442,15 @@ function UC_getbyid()
 }
 
 ##sync the student-task relation
+#create relation for new work and all students who are 
+#in this course
 function SW_SYNC_new()
 {
+    #get WORK id
     wid=$1
     WORK=`WORK_getbyid $wid`
     WORK_unfold $WORK
+    ##search in UC table for student id
     maxid=`dataselect $UC ID`
     #query db
     local j=0
@@ -456,23 +461,28 @@ function SW_SYNC_new()
         scid=`echo $temp | cut -d'_' -f3`
 
         if [[ $temp && $cid = $scid ]]; then
+            #generate new S-W record
             NEWSW="0_"${sid}"_"${wid}"_0"
             SW_new $NEWSW
         fi
     done
 }
 
+#delete the S-W relation for all students
+##TODO :TEST not done!
 function SW_SYNC_del()
 {
     swid=$1
-    maxid=`dataselect $W ID`
+    #search for S-W record
+    maxid=`dataselect $SW ID`
     local j=0
     for (( i = 0; i <= $maxid; i++ )); do
-        temp=`WORK_getbyid $i`
-        #unfold WORK object
-        WORK_unfold $temp
+        temp=`SW_getbyid $i`
+        #unfold S-W object
+        wid=`echo $temp|cut -d'_' -f3`
+        #check the wid
         if [[ $temp && $wid = $swid ]]; then
-            WORK_delete $temp
+            SW_delete $temp
         fi
     done
 }

@@ -108,7 +108,7 @@ function USER_manage()
     STATE="Index"
 }
 
-#course manage 
+#course manage (manager side)
 function COURSE_manage()
 {
     #get the number of courses
@@ -163,6 +163,7 @@ function COURSE_manage()
     STATE="Index"
 }
 
+#student_manage (teacher side)
 function Student_manage()
 {
     #get the number of courses
@@ -198,7 +199,9 @@ function Student_manage()
             j=$((j+1))
         fi
     done
+    #show student list
     view_user_list "${array2[*]}" 
+    #ask for option
     view_user_list_teacher
     case $OP in
         1) STATE="Course_addstudent $CCID"
@@ -211,10 +214,14 @@ function Student_manage()
 
 }
 
+#add student to certain course(teacher side) <course_id> [msg]
 function Course_addstudent()
 {
+    #get current course
     CID=$1
+    #call view
     view_course_addstudent $2 
+    #get student object
     STU=`USER_getbyNO $SNO`
     if [[ ! $STU ]]; then
         #Student Not Exist
@@ -222,7 +229,9 @@ function Course_addstudent()
         return
     fi
     USER_unfold $STU
+    #get id
     SID=$id
+    ##check if the target is already in
     #get the number of users
     maxid=`dataselect $UC ID`
     #query db
@@ -234,18 +243,23 @@ function Course_addstudent()
         uid=`echo $temp|cut -d'_' -f2`
         cid=`echo $temp|cut -d'_' -f3`
         if [[ $temp && $cid = $CID && $uid = $SID ]]; then
+            #check
             Course_addstudent $1 "Student_already_in_List!"
             return
         fi
     done
+    #generate new record
     NEWUC="0_"${SID}"_"${CID}
     UC_new $NEWUC
     STATE="Index"
 }
 
+#remove student from a course(teacher side) <course_id> [msg]
 function Course_deletetudent()
 {
+    #get course id
     CID=$1
+    #get student ID
     view_course_deletestudent $2 
     STU=`USER_getbyNO $SNO`
     if [[ ! $STU ]]; then
@@ -255,6 +269,7 @@ function Course_deletetudent()
     fi
     USER_unfold $STU
     SID=$id
+    ##query UC table
     #get the number of users
     maxid=`dataselect $UC ID`
     #query db
@@ -270,9 +285,11 @@ function Course_deletetudent()
             return
         fi
     done
+    #Not found
     Course_deletetudent $1 "Student_Not_in_List!"
 }
 
+#manage task for certain course(teacher side) [msg]
 function Task_manage()
 {    
     #get the number of courses
@@ -284,12 +301,13 @@ function Task_manage()
         temp=`COURSE_getbyid $i`
         COURSE_unfold $temp
         USER_unfold $CUSER
+        #check if the course belongs to current teacher
         if [[ $temp && $uid=$id ]]; then
             array[$j]=$temp
             j=$((j+1))
         fi
     done
-    #call view
+    #show course list
     view_course_list "${array[*]}" $1
     view_course_list_task
 
@@ -309,7 +327,9 @@ function Task_manage()
         fi
     done
 
+    #show task list
     view_task_list "${array2[*]}"
+    #ask for option
     view_task_list_manage
     case $OP in
         1)
@@ -317,6 +337,7 @@ function Task_manage()
         view_task_new
         NEWTASK="0_"${CCID}"_"${NAME}
         WORK_new $NEWTASK
+        #sync the S-W table
         SW_SYNC_new $((id - 1))
             ;;
         2)
@@ -333,6 +354,7 @@ function Task_manage()
         view_task_delete $TARGET
         if [[ $RES = "Y" ]]; then
             WORK_delete $id
+            #sync the S-W table
             SW_SYNC_del $id
             echo "Deleted!"
         else
