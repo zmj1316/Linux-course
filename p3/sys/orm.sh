@@ -444,7 +444,7 @@ function UC_getbyid()
 function SW_SYNC_new()
 {
     wid=$1
-    WORK=WORK_getbyid $wid
+    WORK=`WORK_getbyid $wid`
     WORK_unfold $WORK
     maxid=`dataselect $UC ID`
     #query db
