@@ -275,6 +275,15 @@ function COURSE_getbyid()
 #WORK table file
 W="WORK.db"
 
+function WORK_unfold()
+{
+    #unfold the object
+    id=`echo $1|cut -d'_' -f1`
+    cid=`echo $1|cut -d'_' -f2`
+    NAME=`echo $1|cut -d'_' -f3`
+    CNAME=`echo $1|cut -d'_' -f6`
+}
+
 #WORK_new <WORK_OBJECT>
 function WORK_new()
 {
@@ -320,9 +329,15 @@ function WORK_getbyid()
     id=$1
     cid=`dataselect $W ${id}"_cid"`
     NAME=`dataselect $W ${id}"_NAME"`
+    #attach the course
+    COURSE=`COURSE_getbyid $cid`
     #return WORK_OBJECT 
-        #TODO: return with COURSE_OBJECT 
-    echo ${id}"_"${cid}"_"${NAME}
+    if [[ $cid && $NAME && $COURSE ]]; then
+        echo ${id}"_"${cid}"_"${NAME}"_"${COURSE}
+    else 
+        echo ""
+    fi
+    
 }
 
 
@@ -425,9 +440,42 @@ function UC_getbyid()
     
 }
 
+##sync the student-task relation
+function SW_SYNC_new()
+{
+    wid=$1
+    WORK=WORK_getbyid $wid
+    WORK_unfold $WORK
+    maxid=`dataselect $UC ID`
+    #query db
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`UC_getbyid $i`
+        #unfold WORK object
+        sid=`echo $temp | cut -d'_' -f2`
+        scid=`echo $temp | cut -d'_' -f3`
 
+        if [[ $temp && $cid = $scid ]]; then
+            NEWSW="0_"${sid}"_"${wid}"_0"
+            SW_new $NEWSW
+        fi
+    done
+}
 
-
+function SW_SYNC_del()
+{
+    swid=$1
+    maxid=`dataselect $W ID`
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`WORK_getbyid $i`
+        #unfold WORK object
+        WORK_unfold $temp
+        if [[ $temp && $wid = $swid ]]; then
+            WORK_delete $temp
+        fi
+    done
+}
 
 
 # ###unit test:

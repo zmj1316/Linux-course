@@ -273,7 +273,77 @@ function Course_deletetudent()
     Course_deletetudent $1 "Student_Not_in_List!"
 }
 
+function Task_manage()
+{    
+    #get the number of courses
+    maxid=`dataselect $C ID`
+    #query db
+    local array
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`COURSE_getbyid $i`
+        COURSE_unfold $temp
+        USER_unfold $CUSER
+        if [[ $temp && $uid=$id ]]; then
+            array[$j]=$temp
+            j=$((j+1))
+        fi
+    done
+    #call view
+    view_course_list "${array[*]}" $1
+    view_course_list_task
 
+    #list of TASK
+    #get the number of users
+    maxid=`dataselect $W ID`
+    #query db
+    local array2
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`WORK_getbyid $i`
+        #unfold WORK object
+        cid=`echo $temp|cut -d'_' -f2`
+        if [[ $temp && $cid = $CCID ]]; then
+            array2[$j]=$temp
+            j=$((j+1))
+        fi
+    done
+
+    view_task_list "${array2[*]}"
+    view_task_list_manage
+    case $OP in
+        1)
+        #Add Task
+        view_task_new
+        NEWTASK="0_"${CCID}"_"${NAME}
+        WORK_new $NEWTASK
+        SW_SYNC_new $((id - 1))
+            ;;
+        2)
+        #Edit Task
+        view_task_target
+        TARGET=`WORK_getbyid $id`
+        view_task_edit $TARGET
+        WORK_update $NEWWORK
+            ;;
+        3)
+        #delete task
+        view_task_target
+        TARGET=`WORK_getbyid $id`
+        view_task_delete $TARGET
+        if [[ $RES = "Y" ]]; then
+            WORK_delete $id
+            SW_SYNC_del $id
+            echo "Deleted!"
+        else
+            echo "Canceled!"
+        fi
+            ;;
+        *)
+        Task_manage "Wrong_Selection!"
+            ;;
+    esac
+}
 
 #Run
 while [[ 1 ]]; do

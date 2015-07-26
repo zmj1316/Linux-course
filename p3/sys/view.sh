@@ -43,6 +43,16 @@ function COURSE_fold()
     COURSE=${id}"_"${uid}"_"${NAME}
     echo $COURSE
 }
+
+function WORK_unfold()
+{
+    #unfold the object
+    id=`echo $1|cut -d'_' -f1`
+    cid=`echo $1|cut -d'_' -f2`
+    NAME=`echo $1|cut -d'_' -f3`
+    CNAME=`echo $1|cut -d'_' -f6`
+}
+
 #login view 
 #return login session
 function view_login()
@@ -261,6 +271,13 @@ function view_course_list_teacher()
     #read operation
     read -p "Type the id of the course to edit" CCID
 }
+function view_course_list_task()
+{
+    echo
+    echo
+    #read operation
+    read -p "Type the id of the course to edit" CCID
+}
 #view_course_new [err msg]
 function view_course_new()
 {
@@ -324,6 +341,76 @@ function view_course_deletestudent()
     read   SNO
 }
 
+
+##Task VIEW
+#task list
+function view_task_list()
+{
+    clear
+    local temp=($1)
+    #Error message
+    if [[ $2 ]]; then
+        echo -e "\033[41;37m$2\033[0m"
+    fi
+    #head
+    printf "%-4s%-15s%-15s\n" id  COURSENAME NAME  
+    for i in ${temp[@]} ; do
+        WORK_unfold $i
+        printf "%-4s%-15s%-15s\n" $id $CNAME $NAME 
+    done
+
+}
+function view_task_list_manage()
+{
+    echo
+    echo
+    echo "Options:"
+    echo -e "\t1:Add Task"
+    echo -e "\t2:Edit Task"
+    echo -e "\t3:Delete Task"
+    read -p "Input: " OP
+}
+
+function view_task_new()
+{
+    #display message
+    if [[ $1 ]]; then
+        echo -e "\033[41;37m$1\033[0m"
+    fi
+    echo "Now creating new task:"
+    read -p "Input Task Name:" NAME
+}
+
+#get the target id
+function view_task_target()
+{
+    echo  "Please input the id of the target task:"
+    read -p "id: " id
+}
+
+function view_task_edit()
+{
+    #display message
+    if [[ $2 ]]; then
+        echo -e "\033[41;37m$2\033[0m"
+    fi
+    WORK_unfold $1
+    echo "Current Name is $NAME"
+    read -p "Replace with: " NAME
+    NEWWORK=${id}"_"${cid}"_"${NAME}
+}
+
+function view_task_delete()
+{
+    #display message
+    if [[ $2 ]]; then
+        echo -e "\033[41;37m$2\033[0m"
+    fi
+    WORK_unfold $1
+    echo "You are deleting : "
+    printf "%-4s%-15s%-15s\n" $id $CNAME $NAME 
+    read -p "[Y/N]?" RES
+}
 ##test
 # a[0]="1_0_root_root"
 # a[1]="2_1_010_teacher"
