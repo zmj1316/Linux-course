@@ -259,7 +259,7 @@ function view_course_list_teacher()
     echo
     echo
     #read operation
-    read -p "Type the id of the course to edit" CID
+    read -p "Type the id of the course to edit" CCID
 }
 #view_course_new [err msg]
 function view_course_new()

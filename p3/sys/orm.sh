@@ -416,8 +416,13 @@ function UC_getbyid()
     id=$1
     #query the db
     uid=`dataselect $UC ${id}"_uid"`
-    wid=`dataselect $UC ${id}"_cid"`
-    echo ${id}"_"${uid}"_"${cid}
+    cid=`dataselect $UC ${id}"_cid"`
+    if [[ $uid && $cid  ]]; then
+        echo ${id}"_"${uid}"_"${cid}
+    else
+        echo ""
+    fi
+    
 }
 
 
@@ -466,3 +471,4 @@ function UC_getbyid()
 
 ##relation test
 # USER_getbyid 4
+# UC_getbyid 1
