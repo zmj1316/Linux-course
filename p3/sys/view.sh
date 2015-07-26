@@ -123,6 +123,11 @@ function view_user_list()
         esac
         printf "%-4s%-5s%-10s%-15s\n" $id $TYPE $NO $NAME
     done
+
+}
+
+function view_user_list_manage()
+{
     echo
     echo
     # read operation
@@ -132,6 +137,17 @@ function view_user_list()
     echo -e "\t3:Delete User"
     read -p "Please select:" OP
 }
+function view_user_list_teacher()
+{
+    echo
+    echo
+    # read operation
+    echo "operations:"
+    echo -e "\t1:Add Student"
+    echo -e "\t2:Delete Student"
+    read -p "Please select:" OP
+}
+
 #create user 
 #view_user_new [err msg]
 function view_user_new()
@@ -238,7 +254,7 @@ function view_course_list_manage()
     echo -e "\t3:Delete Course"
     read -p "Please select:" OP
 }
-function view_course_list_student()
+function view_course_list_teacher()
 {
     echo
     echo
@@ -288,8 +304,25 @@ function view_course_delete()
     read -p "Enter [Y/N]" RES
 }
 
+function view_course_addstudent()
+{    
+    #display message
+    if [[ $1 ]]; then
+        echo -e "\033[41;37m$1\033[0m"
+    fi
+    echo "Please Input the LOGINNAME of the student to add: "
+    read   SNO
+}
 
-
+function view_course_deletestudent()
+{
+    #display message
+    if [[ $1 ]]; then
+        echo -e "\033[41;37m$1\033[0m"
+    fi
+    echo "Please Input the LOGINNAME of the student to delete: "
+    read   SNO
+}
 
 ##test
 # a[0]="1_0_root_root"

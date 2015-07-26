@@ -68,6 +68,7 @@ function USER_manage()
     done
     #call view
     view_user_list "${array[*]}"
+    view_user_list_manage
     #selection
     case $OP in
         1)
@@ -179,11 +180,103 @@ function Student_manage()
         fi
     done
     #call view
-    view_course_list "${array[*]}"
-    view_course_list_student
-    
+    view_course_list "${array[*]}" $1
+    view_course_list_teacher
+    case $OP in
+        1)
+            ;;
+    esac
+
+
+
+    #get the number of users
+    maxid=`dataselect $UC ID`
+    #query db
+    array=""
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`UC_getbyid $i`
+        #unfold U-C object
+        uid=`echo temp|cut -d'_' -f2`
+        cid=`echo temp|cut -d'_' -f3`
+        if [[ $temp && $cid = $CID ]]; then
+            array[$j]=`USER_getbyid $uid`
+            j=$((j+1))
+        fi
+    done
+
+
+    view_user_list "${array[*]}"
+    view_user_list_teacher
+    case $OP in
+        1) STATE="Course_addstudent $CID"
+            ;;
+        2) STATE="Course_deletetudent $CID"
+            ;;
+        *) Student_manage "Wrong_Selection!"
+            ;;
+    esac
+
 }
 
+function Course_addstudent()
+{
+    CID=$1
+    view_course_addstudent $2 
+    STU=`USER_getbyNO $SNO`
+    if [[ ! $STU ]]; then
+        #Student Not Exist
+        Course_addstudent "Student Not Exist!"
+    fi
+    USER_unfold $STU
+    SID=$id
+    #get the number of users
+    maxid=`dataselect $UC ID`
+    #query db
+    array=""
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`UC_getbyid $i`
+        #unfold U-C object
+        uid=`echo temp|cut -d'_' -f2`
+        cid=`echo temp|cut -d'_' -f3`
+        if [[ $temp && $cid = $CID && $uid = $SID ]]; then
+            Course_addstudent "Student already in List!"
+            break
+        fi
+    done
+    NEWUC="0_"%SID"_"$CID
+    UC_new $NEWUC
+}
+
+function Course_deletetudent()
+{
+    CID=$1
+    view_course_deletestudent $2 
+    STU=`USER_getbyNO $SNO`
+    if [[ ! $STU ]]; then
+        #Student Not Exist
+        Course_addstudent "Student Not Exist!"
+    fi
+    USER_unfold $STU
+    SID=$id
+    #get the number of users
+    maxid=`dataselect $UC ID`
+    #query db
+    array=""
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`UC_getbyid $i`
+        #unfold U-C object
+        uid=`echo temp|cut -d'_' -f2`
+        cid=`echo temp|cut -d'_' -f3`
+        if [[ $temp && $cid = $CID && $uid = $SID ]]; then
+            UC_delete $temp
+            break
+        fi
+    done
+    Course_deletetudent "Student Not in List!"
+}
 
 
 

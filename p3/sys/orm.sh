@@ -399,16 +399,16 @@ function UC_new()
     datainsert $UC ${id}"_cid" $cid
 }
 
-#RELA_update <RELA_OBJECT>
-function UC_update()
+#RELA_delete <RELA_OBJECT>
+function UC_delete()
 {
     #unfold the object
     id=`echo $1|cut -d'_' -f1`
     uid=`echo $1|cut -d'_' -f2`
     cid=`echo $1|cut -d'_' -f3`
-    #update into table
-    dataupdate $UC ${id}"_uid" $uid
-    dataupdate $UC ${id}"_cid" $cid
+    #delete into table
+    datadelete $UC ${id}"_uid" $uid
+    datadelete $UC ${id}"_cid" $cid
 }
 
 function UC_getbyid()
