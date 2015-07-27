@@ -368,18 +368,19 @@ function SW_new()
     datainsert $R ${id}"_STAT" $STAT 
 }
 
-#RELA_update <RELA_OBJECT>
+#RELA_update <SW_object>
 function SW_update()
 {
     #unfold the object
-    id=`echo $1|cut -d'_' -f1`
-    uid=`echo $1|cut -d'_' -f2`
-    wid=`echo $1|cut -d'_' -f3`
-    STAT=`echo $1|cut -d'_' -f4`
-    #update into table
-    dataupdate $R ${id}"_uid" $uid
-    dataupdate $R ${id}"_wid" $wid
-    dataupdate $R ${id}"_STAT" $STAT
+    # id=`echo $1|cut -d'_' -f1`
+    id=$1
+    # uid=`echo $1|cut -d'_' -f2`
+    # wid=`echo $1|cut -d'_' -f3`
+    # STAT=`echo $1|cut -d'_' -f4`
+    # #update into table
+    # dataupdate $R ${id}"_uid" $uid
+    # dataupdate $R ${id}"_wid" $wid
+    dataupdate $R ${id}"_STAT" 1
 }
 
 function SW_getbyid()
@@ -477,7 +478,7 @@ function SW_SYNC_del()
 {
     swid=$1
     #search for S-W record
-    maxid=`dataselect $SW ID`
+    maxid=`dataselect $R ID`
     local j=0
     for (( i = 0; i <= $maxid; i++ )); do
         temp=`SW_getbyid $i`

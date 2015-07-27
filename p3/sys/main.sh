@@ -57,7 +57,7 @@ function USER_manage()
     #query db
     local array
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`USER_getbyid $i`
         if [[ $temp ]]; then
             array[$j]=$temp
@@ -114,7 +114,7 @@ function COURSE_manage()
     #query db
     local array
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`COURSE_getbyid $i`
         if [[ $temp ]]; then
             array[$j]=$temp
@@ -169,7 +169,7 @@ function Student_manage()
     #query db
     local array
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`COURSE_getbyid $i`
         COURSE_unfold $temp
         USER_unfold $CUSER
@@ -187,7 +187,7 @@ function Student_manage()
     #query db
     local array2
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`UC_getbyid $i`
         #unfold U-C object
         uid=`echo $temp|cut -d'_' -f2`
@@ -235,7 +235,7 @@ function Course_addstudent()
     #query db
     local array
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`UC_getbyid $i`
         #unfold U-C object
         uid=`echo $temp|cut -d'_' -f2`
@@ -272,7 +272,7 @@ function Course_deletetudent()
     maxid=`dataselect $UC ID`
     #query db
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`UC_getbyid $i`
         #unfold U-C object
         uid=`echo $temp|cut -d'_' -f2`
@@ -296,7 +296,7 @@ function Task_manage()
     #query db
     local array
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`COURSE_getbyid $i`
         COURSE_unfold $temp
         USER_unfold $CUSER
@@ -316,7 +316,7 @@ function Task_manage()
     #query db
     local array2
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`WORK_getbyid $i`
         #unfold WORK object
         cid=`echo $temp|cut -d'_' -f2`
@@ -337,7 +337,7 @@ function Task_manage()
         NEWTASK="0_"${CCID}"_"${NAME}
         WORK_new $NEWTASK
         #sync the S-W table
-        SW_SYNC_new $((id - 1))
+        SW_SYNC_new $((id))
             ;;
         2)
         #Edit Task
@@ -366,8 +366,9 @@ function Task_manage()
         TARGET=`WORK_getbyid $id`
         WORK2ST $id
         view_SW_list_teacher "${RES[*]}"
+            ;;
         *)
-        Task_manage "Wrong_Selection!"
+            Task_manage "Wrong_Selection!"
             ;;
     esac
     STATE="Index"
@@ -379,10 +380,10 @@ function WORK2ST()
     swid=$1
     #list of SW
     #get the number of users
-    maxid=`dataselect $SW ID`
+    maxid=`dataselect $R ID`
     #query db
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`SW_getbyid $i`
         #unfold SW object
         wid=`echo $temp|cut -d'_' -f3`
@@ -400,11 +401,11 @@ function Task_edit()
     suid=`echo $CUSER|cut -d'_' -f1`
     #list of SW
     #get the number of users
-    maxid=`dataselect $SW ID`
+    maxid=`dataselect $R ID`
     #query db
     local array2
     local j=0
-    for (( i = 0; i <= $maxid; i++ )); do
+    for (( i = 1; i <= $maxid; i++ )); do
         temp=`SW_getbyid $i`
         #unfold SW object
         uid=`echo $temp|cut -d'_' -f2`
@@ -413,8 +414,8 @@ function Task_edit()
             j=$((j+1))
         fi
     done
-    view_SW_list_student "${RES[*]}"
-
+    view_SW_list_student "${array2[*]}"
+    SW_update $TID
 }
 
 

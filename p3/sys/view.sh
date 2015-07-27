@@ -101,7 +101,6 @@ function view_index()
         #TE
         echo -e "\t1:student manage"
         echo -e "\t2:Task manage"
-        echo -e "\t3:Task check"
             ;;
         2)
         #student
@@ -442,7 +441,9 @@ function view_SW_list_teacher()
             1) STAT="finished"
                 ;;
         esac
-        printf "%-4s%-15s%-9s\n" $id $SNAME $STAT 
+        if [[ $CNAME && $TNAME && $STAT ]]; then
+            printf "%-4s%-15s%-9s\n" $id $SNAME $STAT 
+        fi
     done
     read -p "Press Enter To return" RES
 }
@@ -466,7 +467,9 @@ function view_SW_list_student()
             1) STAT="finished"
                 ;;
         esac
-        printf "%-4s%-15s%-15s%-9s\n" $id $CNAME $TNAME $STAT 
+        # if [[ $CNAME && $TNAME && $STAT ]]; then
+            printf "%-4s%-15s%-15s%-9s\n" $id $CNAME $TNAME $STAT 
+        # fi
     done
     echo "Type the id of the task to accomplish:"
     read TID 
