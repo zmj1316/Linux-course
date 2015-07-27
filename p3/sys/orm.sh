@@ -389,8 +389,11 @@ function SW_getbyid()
     uid=`dataselect $R ${id}"_uid"`
     wid=`dataselect $R ${id}"_wid"`
     STAT=`dataselect $R ${id}"_STAT"`
-    echo ${id}"_"${uid}"_"${wid}"_"${STAT}
+    USER=`USER_getbyid $uid`
+    WORK=`WORK_getbyid $wid`
+    echo ${id}"_"${uid}"_"${wid}"_"${STAT}"_"${USER}"_"${WORK}
 }
+
 
 #USER-COURSE RELATION:   id_uid_cid
 

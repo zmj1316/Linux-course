@@ -42,8 +42,6 @@ function Index()
             ;;
         "1_2") STATE="Task_manage"
             ;;
-        "1_3") STATE="Task_list"
-            ;;
         "2_1") STATE="Task_edit"
             ;;
         *) Index "Wrong_Selection!"
@@ -292,6 +290,7 @@ function Course_deletetudent()
 #manage task for certain course(teacher side) [msg]
 function Task_manage()
 {    
+    ##List Courses
     #get the number of courses
     maxid=`dataselect $C ID`
     #query db
@@ -361,11 +360,63 @@ function Task_manage()
             echo "Canceled!"
         fi
             ;;
+        4)
+        #view task status
+        view_task_target
+        TARGET=`WORK_getbyid $id`
+        WORK2ST $id
+        view_SW_list_teacher "${RES[*]}"
         *)
         Task_manage "Wrong_Selection!"
             ;;
     esac
+    STATE="Index"
 }
+
+function WORK2ST()
+{
+    RES=""
+    swid=$1
+    #list of SW
+    #get the number of users
+    maxid=`dataselect $SW ID`
+    #query db
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`SW_getbyid $i`
+        #unfold SW object
+        wid=`echo $temp|cut -d'_' -f3`
+        if [[ $temp && $wid = $swid ]]; then
+            RES[$j]=$temp
+            j=$((j+1))
+        fi
+    done
+}
+
+
+
+function Task_edit()
+{
+    suid=`echo $CUSER|cut -d'_' -f1`
+    #list of SW
+    #get the number of users
+    maxid=`dataselect $SW ID`
+    #query db
+    local array2
+    local j=0
+    for (( i = 0; i <= $maxid; i++ )); do
+        temp=`SW_getbyid $i`
+        #unfold SW object
+        uid=`echo $temp|cut -d'_' -f2`
+        if [[ $temp && $uid = $suid ]]; then
+            array2[$j]=$temp
+            j=$((j+1))
+        fi
+    done
+    view_SW_list_student "${RES[*]}"
+
+}
+
 
 #Run
 while [[ 1 ]]; do

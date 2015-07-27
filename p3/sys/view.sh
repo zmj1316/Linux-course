@@ -53,6 +53,17 @@ function WORK_unfold()
     CNAME=`echo $1|cut -d'_' -f6`
 }
 
+function SW_unfold()
+{
+    #unfold the object
+    id=`echo $1|cut -d'_' -f1`
+    uid=`echo $1|cut -d'_' -f2`
+    wid=`echo $1|cut -d'_' -f3`
+    STAT=`echo $1|cut -d'_' -f4`
+    SNAME=`echo $1|cut -d'_' -f8`
+    TNAME=`echo $1|cut -d'_' -f12`
+    CNAME=`echo $1|cut -d'_' -f15`
+}
 #login view 
 #return login session
 function view_login()
@@ -276,7 +287,7 @@ function view_course_list_task()
     echo
     echo
     #read operation
-    read -p "Type the id of the course to edit" CCID
+    read -p "Type the id of the course " CCID
 }
 #view_course_new [err msg]
 function view_course_new()
@@ -368,6 +379,7 @@ function view_task_list_manage()
     echo -e "\t1:Add Task"
     echo -e "\t2:Edit Task"
     echo -e "\t3:Delete Task"
+    echo -e "\t4:View Task Status"
     read -p "Input: " OP
 }
 
@@ -410,6 +422,54 @@ function view_task_delete()
     echo "You are deleting : "
     printf "%-4s%-15s%-15s\n" $id $CNAME $NAME 
     read -p "[Y/N]?" RES
+}
+
+function view_SW_list_teacher()
+{
+    clear
+    local temp=($1)
+    #Error message
+    if [[ $2 ]]; then
+        echo -e "\033[41;37m$2\033[0m"
+    fi
+    #head
+    printf "%-4s%-15s%-9s\n" id Student Status  
+    for i in ${temp[@]} ; do
+        SW_unfold $i
+        case $STAT in
+            0) STAT="undone"
+                ;;
+            1) STAT="finished"
+                ;;
+        esac
+        printf "%-4s%-15s%-9s\n" $id $SNAME $STAT 
+    done
+    read -p "Press Enter To return" RES
+}
+
+
+function view_SW_list_student()
+{
+    clear
+    local temp=($1)
+    #Error message
+    if [[ $2 ]]; then
+        echo -e "\033[41;37m$2\033[0m"
+    fi
+    #head
+    printf "%-4s%-15s%-15s%-9s\n" id Course Task Status  
+    for i in ${temp[@]} ; do
+        SW_unfold $i
+        case $STAT in
+            0) STAT="undone"
+                ;;
+            1) STAT="finished"
+                ;;
+        esac
+        printf "%-4s%-15s%-15s%-9s\n" $id $CNAME $TNAME $STAT 
+    done
+    echo "Type the id of the task to accomplish:"
+    read TID 
 }
 ##test
 # a[0]="1_0_root_root"
