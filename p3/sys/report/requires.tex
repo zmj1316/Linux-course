@@ -1,0 +1,68 @@
+\documentclass[notitlepage,cs4size,punct,oneside]{report}
+\usepackage{CJK}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage{listings}
+
+\renewcommand{\ttdefault}{consolas}
+
+\lstset{numbers=left, numberstyle=\tiny, keywordstyle=\color{blue!70}, commentstyle=\color{red!50!green!50!blue!50}, aboveskip=1em, keywordstyle=\bf\color{blue},
+   identifierstyle=\bf,escapebegin=\begin{CJK}{UTF8}{hei},escapeend=\end{CJK},extendedchars=false,
+   numberstyle=\color[RGB]{0,192,192},
+  commentstyle=\color[RGB]{0,96,96},
+ stringstyle=\rmfamily\slshape\color[RGB]{245,100,0},language=C}
+\begin{document}
+\begin{CJK}{UTF8}{hei} % gbsn: 宋体简化字；gkai 楷体简化字;  bsmi 繁体宋书；bkai 繁体楷书
+
+
+\renewcommand{\abstractname}{摘 \qquad 要}
+\renewcommand{\contentsname}{\center 目\qquad\qquad 录}
+\renewcommand{\listfigurename}{图 \quad 示 \quad 目 \quad 录}
+\renewcommand{\listtablename}{表 \quad 格 \quad 目 \quad 录}
+\renewcommand{\appendixname}{附录}
+\renewcommand{\chaptername}{章节}
+%\renewcommand{\refname}{\center 参 \quad 考 \quad 文 \quad 献}
+%\renewcommand{\bibname}{专著}
+\renewcommand{\indexname}{\center 索 \qquad 引}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+%\renewcommand{\pagename}{页}
+\bibliographystyle{plain}
+\newcommand{\upcite}[1]{\textsuperscript{\cite{#1}}}
+
+
+\title{作业管理系统需求文档}
+\author{章敏捷, 计算机科学，3130102283}
+%\date{年月日}
+
+\maketitle
+\tableofcontents
+\pagebreak
+
+\chapter{需求分析}
+\paragraph{}以文件的形式存储数据，实现三类不同权限用户的操作
+\section{总体功能}
+\begin{description}
+  \item[管理员] 创建、修改、删除、显示（list）教师帐号；教师帐户包括教师工号、教师姓名，教师用户以教师工号登录。\\ \\
+ 创建、修改、删除课程；绑定（包括添加、删除）课程与教师用户。课程名称以简单的中文或英文命名。
+  \item[教师 ] 对某门课程，创建或导入、修改、删除学生帐户，根据学号查找学生帐号；学生帐号的基本信息包括学号和姓名，学生使用学号登录。\\ \\
+  布置作业或实验。包括新建、编辑、删除、显示（list）作业或实验等功能。\\ \\
+  查找、打印所有学生的完成作业情况。
+  \item[学生 ] 在教师添加学生账户后，学生就可以登录系统，并完成作业和实验。\\ \\
+  基本功能：编辑作业或实验功能；查询作业或实验完成情况。
+\end{description}
+\section{详细分析}
+\subsection{管理员}
+\paragraph{}用户管理功能，可以选择新建用户，修改用户信息，删除用户。修改和是删除通过显示用户列表来进行选择。可以操作所有类型的用户。
+\paragraph{}课程管理功能，可以选择新建课程，修改课程信息，删除课程。新建课程同时需要绑定相应的课程教师。
+\subsection{教师}
+\paragraph{}学生管理功能，可以选择某门课程，查看选课的学生，可以通过学生学号将其添加到该门课程下，或者删除某个学生
+\paragraph{}作业管理功能，可以选择某门课程，查看该课程的作业，可以新建、删除、修改作业信息，新建、删除作业的同时会将作业同步到所有学生的信息下。也可以查看某项作业的完成情况。
+\subsection{学生}
+\paragraph{}提交作业功能，可以查询该学生名下的所有作业，并且选择一项作业完成提交，标记为已完成。
+
+\pagebreak
+\end{CJK}
+\end{document}

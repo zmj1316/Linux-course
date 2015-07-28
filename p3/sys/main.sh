@@ -25,7 +25,7 @@ function Login()
     fi
     clear
     #passwd not match or user not exist
-    Login Incorrect!
+    Login "Incorrect!"
 }
 
 #index user manu
@@ -209,7 +209,7 @@ function Student_manage()
         *) Student_manage "Wrong_Selection!"
             ;;
     esac
-
+    STATE="Index"
 }
 
 #add student to certain course(teacher side) <course_id> [msg]
@@ -374,6 +374,7 @@ function Task_manage()
     STATE="Index"
 }
 
+#get a list of S-W from WORK
 function WORK2ST()
 {
     RES=""
@@ -395,9 +396,10 @@ function WORK2ST()
 }
 
 
-
+#submit a task (student side)
 function Task_edit()
 {
+    #the uid of current student
     suid=`echo $CUSER|cut -d'_' -f1`
     #list of SW
     #get the number of users
@@ -414,8 +416,10 @@ function Task_edit()
             j=$((j+1))
         fi
     done
+    #call view
     view_SW_list_student "${array2[*]}"
     SW_update $TID
+    STATE="Index"
 }
 
 
