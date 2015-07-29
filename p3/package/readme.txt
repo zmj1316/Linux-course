@@ -1,0 +1,2 @@
+本目录下为前三个实验的报告
+bash编程的报告和代码分别在project目录下的report和src目录
