@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
+#include <string.h>
 #define MAXLEN 100 /* The maximum length */
 
 #define STD 0
@@ -9,15 +9,17 @@
 
 
 char 	PWD[MAXLEN+1];
-char	CMD[MAXLEN+1];
+char	CMD[MAXLEN+1]="/tmp";
 int 	INPUT;
 FILE 	*IN;
+int err;
 
 int main(int argc, char *argv[]) {
+    const char *ptr=CMD;
 	while(1){
 			getcwd(PWD, MAXLEN + 1); 
 		printf("%s>", PWD);
-		fflush(stdout);
+		fflush(stdin);
 		/* wait for user input from stdin */
 		if (argc == 1){
 			INPUT  = STD;
@@ -33,10 +35,14 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		fgets(CMD,MAXLEN,IN);
-		if (chdir(CMD)<0)
+		char *tmp;
+		if (CMD && (tmp = strrchr(CMD, '\n')) != NULL) {
+            *tmp = 0;
+        }
+		if (err=chdir(ptr))
 		{
-			printf("chdir failed!\n");
-			getchar();	
+			printf("%d\n",err);
+			perror("chdir");
 			continue;
 		}
 		getcwd(PWD, MAXLEN + 1); 
