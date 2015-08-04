@@ -48,9 +48,6 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
-		
-
-		getchar();	
 	}
 	
 }
