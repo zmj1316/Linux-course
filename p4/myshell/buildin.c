@@ -4,10 +4,7 @@
 #include <dirent.h>
 #include <errno.h>
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <fcntl.h>
+
 int stat(const char *path, struct stat *buf);
 
 int buildin(char arg[][MAXLEN + 1] )
@@ -24,6 +21,10 @@ int buildin(char arg[][MAXLEN + 1] )
 	if (!strcmp(arg[0],"clr"))
 	{
 		b_clr();
+	}
+	if (!strcmp(arg[0],"dir"))
+	{
+	    b_dir();
 	}
 	return 0;
 }
@@ -130,29 +131,3 @@ void mode_to_letters(int mode,char str[])
         if(mode&S_IWOTH)str[8] = 'w';
         if(mode&S_IXOTH)str[9] = 'x';
 }
-// uid gid to name group
-/*#include<pwd.h>
-char *uid_to_name(uid_t uid)
-{
-        struct passwd *getpwuid(),*pw_ptr;
-        static char numstr[10];
-        if((pw_ptr = getpwuid(uid)) == NULL){
-                sprintf(numstr,"%d",uid);
-                return numstr;
-        }
-        else
-                return pw_ptr->pw_name;
-}
- 
-#include<grp.h>
-char *gid_to_name(gid_t gid)
-{
-         struct group *getgrgid(),*grp_ptr;
-        static char numstr[10];
-        if((grp_ptr = getgrgid(gid)) == NULL){
-                sprintf(numstr,"%d",gid);
-                return numstr;
-        }
-        else
-                return grp_ptr->gr_name;
-}*/
