@@ -10,7 +10,7 @@ int main()
 		getcwd(pwd, MAXLEN + 1); 
 		printf("%s>", pwd);
 		fgets(cmd,MAXLEN,stdin);
-		parser(cmd, arg);
-		buildin(arg);
+		int arg_c=parser(cmd, arg);
+		buildin(arg_c,arg);
 	}
 }

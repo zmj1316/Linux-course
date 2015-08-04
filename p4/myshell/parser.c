@@ -11,7 +11,7 @@ int parser(
 	while ((c = *CMD++) == ' ') ; /*Skip leading spaces*/
 	while (c != 0 && c != '\n') /*Stop while reach NULL or Enter*/
 	{
-		if (c == ' ')
+		if (c == ' ' || c =='\t')
 		{
 			arg[i][b++] = 0; /*End of string*/
 			b = 0;

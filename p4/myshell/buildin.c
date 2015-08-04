@@ -7,7 +7,7 @@
 
 int stat(const char *path, struct stat *buf);
 
-int buildin(char arg[][MAXLEN + 1] )
+int buildin(int arg_c,char arg[][MAXLEN + 1] )
 {
 	if (!strcmp(arg[0],"cd"))
 	{

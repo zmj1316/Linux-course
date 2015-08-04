@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 		}
 		fgets(cmd, MAXLEN, IN);
 		int arg_c = parser(cmd, arg);
-		if (buildin(arg))
+		if (buildin(arg_c,arg))
 		{
 			continue;
 		}
