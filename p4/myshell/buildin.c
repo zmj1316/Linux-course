@@ -7,7 +7,7 @@
 
 int stat(const char *path, struct stat *buf);
 
-int buildin(int arg_c,char arg[][MAXLEN + 1] )
+int buildin(int arg_c, char arg[][MAXLEN + 1])
 {
 	if (!strcmp(arg[0],"cd"))
 	{
@@ -24,8 +24,12 @@ int buildin(int arg_c,char arg[][MAXLEN + 1] )
 	}
 	if (!strcmp(arg[0],"dir"))
 	{
-	    b_dir();
+        b_dir();
 	}
+    if (!strcmp(arg[0],"echo"))
+    {
+        b_echo(arg_c,arg);
+    }
 	return 0;
 }
 static void b_cd(const char *dst)
@@ -61,6 +65,24 @@ static void b_dir()
 {
 	b_ls(".");
 }
+
+static void b_echo(int arg_c, char arg[][MAXLEN + 1])
+{
+    for (int i = 1; i < arg_c; ++i)
+    {
+        fflush(stdout);
+        fprintf(stdout, "%s ", arg[i]);
+    }
+    fprintf(stdout, "%s\n", arg[arg_c]);
+}
+
+
+
+
+
+
+
+
 static void b_ls(char dirname[])
 {
 /*

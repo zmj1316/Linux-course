@@ -8,12 +8,13 @@
 #include <fcntl.h>
 #include <pwd.h>
 #include <grp.h>
-int buildin(char [][MAXLEN + 1]);	
+int buildin(int, char [][MAXLEN + 1]);	
 static void b_cd(const char *);
 static void b_pwd();
 static void b_clr();
 static void b_dir();
 static void b_ls(char *);
+static void b_echo(int, char [][MAXLEN + 1]);
 void dostat(char *);
 void show_file_info(char *,struct stat *);
 void mode_to_letters(int mode,char str[]);
