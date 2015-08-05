@@ -30,6 +30,18 @@ int buildin(int arg_c, char arg[][MAXLEN + 1])
     {
         b_echo(arg_c,arg);
     }
+    if (!strcmp(arg[0],"help"))
+    {
+        b_help();
+    }
+    if (!strcmp(arg[0],"quit"))
+    {
+        b_quit();
+    }
+    if (!strcmp(arg[0],"env"))
+    {
+        b_env();
+    }
 	return 0;
 }
 static void b_cd(const char *dst)
@@ -76,7 +88,67 @@ static void b_echo(int arg_c, char arg[][MAXLEN + 1])
     fprintf(stdout, "%s\n", arg[arg_c]);
 }
 
+static void b_help()
+{
+    FILE *fp = fopen("help.txt","r");
+    if (fp==NULL)
+    {
+        fprintf(stderr,"Manual not exist!\n");
+        exit(1);
+    }
+    b_more(fp);
+}
 
+static void b_quit()
+{
+    exit(0);
+}
+
+static void b_env()
+{
+    char cpath[MAXLEN];
+    readlink ("/proc/self/exe", cpath, MAXLEN);
+    fprintf(stdout,"%-10s\t%-20s\n","PWD",pwd);
+    fprintf(stdout,"%-10s\t%-20s\n","SHELL",cpath);
+}
+#define PAGELEN 24
+#define LINELEN 512
+
+void b_more(FILE * fp)
+{
+	char line[LINELEN];
+	int  num_of_lines = 0;
+	int see_more(), reply;
+	while (fgets(line, LINELEN, fp))
+	{
+		if (num_of_lines == PAGELEN)
+		{
+			reply = see_more();
+			if (reply == 0)
+				break;
+			num_of_lines -= reply;
+		}
+		if (fputs(line, stdout) == EOF)
+			return;
+		num_of_lines++;
+	}
+}
+
+int see_more()
+{
+	int c;
+	printf("\033[7m more?\033[m");
+	while ((c = getchar()) != EOF)
+	{
+		if (c == 'q')
+			return 0;
+		if (c == ' ')
+			return PAGELEN;
+		if (c == '\n')
+			return 1;
+	}
+	return 0;
+}
 
 
 
