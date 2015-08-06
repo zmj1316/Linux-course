@@ -10,28 +10,27 @@
 
 
 
-char 	pwd[MAXLEN + 1];
-char	cmd[MAXLEN + 1];
-char	arg[MAXLEN + 1][MAXLEN + 1];
-int 	INPUT;
-FILE 	*IN;
-int err;
+char 	pwd[MAXLEN + 1];	/*PWD var*/
+char	cmd[MAXLEN + 1];	/*cmd buffer*/
+char	arg[MAXLEN + 1][MAXLEN + 1];/*arguments buffer*/
+int 	INPUT;/*Input type*/
+FILE 	*IN;  /*Input stream*/
+int err;	  /*Error code*/
 
 
 int main(int argc, char *argv[]) 
 {
-    const char *ptr=cmd;
 	while(1){
-		getcwd(pwd, MAXLEN + 1); 
-		fprintf(stdout,"%s>", pwd);
+		getcwd(pwd, MAXLEN + 1);	/*get PWD*/
+		fprintf(stdout,"%s>", pwd);	/*Print promote*/
 		fflush(stdin);
-		/* wait for user input from stdin */
+		/* Wait for user to input from stdin */
 		if (argc == 1)
 		{
 			INPUT = STD;
 			IN = stdin; 
 		}
-		/* else from script file */
+		/* Else from the script file */
 		else
 		{
 			INPUT = FIL;
@@ -42,12 +41,15 @@ int main(int argc, char *argv[])
 				exit(1);
 			}
 		}
-		fgets(cmd, MAXLEN, IN);
-		int arg_c = parser(cmd, arg);
+		fgets(cmd, MAXLEN, IN);	/*Read CMD*/
+		int arg_c = parser(cmd, arg);/*Parse arguments*/
+		/*Check for buildin cmds*/
 		if (buildin(arg_c,arg))
 		{
 			continue;
 		}
+		/*Call outside programs*/
+		
 	}
 	
 }
