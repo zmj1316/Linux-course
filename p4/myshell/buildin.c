@@ -3,7 +3,7 @@
 #include <string.h>
 #include <dirent.h>
 #include <errno.h>
-
+#include <time.h>
 
 int stat(const char *path, struct stat *buf);
 
@@ -221,7 +221,7 @@ void show_file_info(char *filename,struct stat *info_p)
         printf("%-8s",uid_to_name(info_p->st_uid));
         printf("%-8s",gid_to_name(info_p->st_gid));
         printf("%8ld",(long)info_p->st_size);
-        // printf("%.12s",4+ctime(&info_p->st_mtime));
+        printf(" %.12s",4+ctime(&(info_p->st_mtime)));
         printf(" %s\n",filename);
 }
  
