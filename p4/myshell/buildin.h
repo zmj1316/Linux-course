@@ -24,29 +24,4 @@ void dostat(char *);
 void show_file_info(char *,struct stat *);
 void mode_to_letters(int mode,char str[]);
 // uid gid to name group
-#include <pwd.h>
-char *uid_to_name(uid_t uid)
-{
-        struct passwd *getpwuid(),*pw_ptr;
-        static char numstr[10];
-        if((pw_ptr = getpwuid(uid)) == NULL){
-                sprintf(numstr,"%d",uid);
-                return numstr;
-        }
-        else
-                return pw_ptr->pw_name;
-}
- 
-#include <grp.h>
-char *gid_to_name(gid_t gid)
-{
-         struct group *getgrgid(),*grp_ptr;
-        static char numstr[10];
-        if((grp_ptr = getgrgid(gid)) == NULL){
-                sprintf(numstr,"%d",gid);
-                return numstr;
-        }
-        else
-                return grp_ptr->gr_name;
-}
 #endif

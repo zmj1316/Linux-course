@@ -167,7 +167,6 @@ static void b_ls(char dirname[])
         else
         {
                 while((direntp = readdir(dir_ptr)) != NULL)
-        //打印结果
                         dostat(direntp->d_name);
  
 //printf("%s\n",direntp->d_name);
@@ -183,23 +182,46 @@ void dostat(char *filename)
         if(stat(filename,&info) == -1)
                 perror(filename);
         else
- 
-//分析stat结构体
                 show_file_info(filename,&info);
 }
  
+#include <pwd.h>
+char *uid_to_name(uid_t uid)
+{
+        struct passwd *getpwuid(),*pw_ptr;
+        static char numstr[10];
+        if((pw_ptr = getpwuid(uid)) == NULL){
+                sprintf(numstr,"%d",uid);
+                return numstr;
+        }
+        else
+                return pw_ptr->pw_name;
+}
+ 
+#include <grp.h>
+char *gid_to_name(gid_t gid)
+{
+         struct group *getgrgid(),*grp_ptr;
+        static char numstr[10];
+        if((grp_ptr = getgrgid(gid)) == NULL){
+                sprintf(numstr,"%d",gid);
+                return numstr;
+        }
+        else
+                return grp_ptr->gr_name;
+}
 void show_file_info(char *filename,struct stat *info_p)
 {
-        char *uid_to_name(),*ctime(),*gid_to_name(),*filemode();
+        // char *uid_to_name(),*ctime(),*gid_to_name(),*filemode();
 //      void mode_to_letters();
         char modestr[11];
         mode_to_letters(info_p->st_mode,modestr);
         printf("%s",modestr);
-        printf("%4d",(int)info_p->st_nlink);
+        printf("%4d ",(int)info_p->st_nlink);
         printf("%-8s",uid_to_name(info_p->st_uid));
         printf("%-8s",gid_to_name(info_p->st_gid));
         printf("%8ld",(long)info_p->st_size);
-        printf("%.12s",4+ctime(&info_p->st_mtime));
+        // printf("%.12s",4+ctime(&info_p->st_mtime));
         printf(" %s\n",filename);
 }
  
