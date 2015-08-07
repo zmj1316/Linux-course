@@ -23,25 +23,47 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 		/* Have parameter */
 		if (arg_c != 0){
 		    int i;
-			for (i = 0; i <= arg_c && strcmp(arg[i],"&"); ++i)
+			for (i = 0; i <= arg_c ; ++i)
+			{
+				if (!strcmp(arg[i],"<"))
+				{
+					if ( freopen(arg[++i],"r",stdin) == NULL )
+						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
+				}
+				if (!strcmp(arg[i],">"))
+				{
+					if( freopen(arg[++i],"w",stdout) == NULL )
+						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
+				}
+				if (!strcmp(arg[i],">>"))
+				{
+					if( freopen(arg[++i],"a",stdout) == NULL )
+						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
+				}
 				arg_temp[i] = arg[i];
+			}
+			if (!strcmp(arg[arg_c],"&")) arg_temp[arg_c]=NULL;
 			arg_temp[i] = NULL;
 			execvp(arg[0], arg_temp);	/*execute*/
 		}
 		else{
 			execlp(arg[0],arg[0],(char*)0);
 		}
+		return;
 	}
-	/* parent process */
-    int status;
-    /* Remove parent env*/
-    unsetenv("parent");
-
-    /* Background process */
-    if (!strcmp(arg[arg_c],"&"))
-        return;
-    /* Wait for the child process */
-	if ((pid == waitpid(pid, &status, 0)) < 0) 
-		fprintf(stderr, "waitpid error...");
-	return ;
+	else{
+			/* parent process */
+		    int status;
+		    /* Remove parent env*/
+		    unsetenv("parent");
+		    freopen("/dev/tty", "r", stdin);
+		    freopen("/dev/tty","w",stdout);
+		    /* Background process */
+		    if (!strcmp(arg[arg_c],"&"))
+		        return;
+		    /* Wait for the child process */
+			if ((pid == waitpid(pid, &status, 0)) < 0) 
+				fprintf(stderr, "waitpid error...");
+			return;
+	}
 }
