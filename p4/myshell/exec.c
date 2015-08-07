@@ -1,6 +1,7 @@
 #include "exec.h"
 #include "global.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
@@ -13,9 +14,7 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 	strcat(parent,pwd);				
 	strcat(parent,"myshell");
 	/*Append parent to environ*/
-	int i;
-	for (i = 0; environ[i]; ++i);
-	environ[i] = (char*)malloc(strlen(parent));
+	putenv(parent);
 
 	/*Fork new process*/
 	if ((pid = fork()) < 0)		/*Fork error*/
@@ -36,8 +35,7 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 	/* parent process */
     int status;
     /* Remove parent env*/
-    free(environ[i]);
-    environ[i] = NULL;
+    unsetenv("parent");
 
     /* Background process */
     if (!strcmp(arg[arg_c],"&"))
