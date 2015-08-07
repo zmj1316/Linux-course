@@ -6,7 +6,7 @@
 
 #define MAXLEN 100 /*Max length*/
 
-extern char 	pwd[MAXLEN + 1];
+extern char 	*pwd;
 extern char		cmd[MAXLEN + 1];
 extern char		arg[MAXLEN + 1][MAXLEN + 1];
 extern char 	**environ;

@@ -62,10 +62,11 @@ static void b_cd ( /*run cd cmd*/
             const char *dst /*dst directory*/
             )
 {
-	fprintf(stdout, "cd::%s\n",dst);
 	if (dst[0] != 0){
-		if (!chdir(dst))
-			strcpy(pwd, dst); /* update the current work director */
+		if (!chdir(dst)){
+		    strcpy(pwd, dst); /* update the current work director */
+		}
+			
 		else{
 			/* error process */
 			if (errno == ENOENT){

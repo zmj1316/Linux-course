@@ -10,18 +10,33 @@
 #include "exec.h"
 
 
-char 	pwd[MAXLEN + 1];	/*PWD var*/
+char 	*pwd;	/*PWD var*/
 char	cmd[MAXLEN + 1];	/*cmd buffer*/
 char	arg[MAXLEN + 1][MAXLEN + 1];/*arguments buffer*/
 int 	INPUT;/*Input type*/
 FILE 	*IN;  /*Input stream*/
 int err;	  /*Error code*/
 
+void getpwd()
+{
+    for (int i = 0; environ[i]; ++i)
+    {
+        char temp[5];
+        memcpy(temp,environ[i],4);
+        temp[4]=0;
+        if (!strcmp(temp,"PWD="))
+        {
+            pwd = environ[i] + 4;
+            return;
+        }
+            
+    }
+}
 
 int main(int argc, char *argv[]) 
 {
 	while(1){
-		getcwd(pwd, MAXLEN + 1);	/*get PWD*/
+        getpwd();
 		fprintf(stdout,"%s>", pwd);	/*Print promote*/
 		fflush(stdin);
 		/* Wait for user to input from stdin */
