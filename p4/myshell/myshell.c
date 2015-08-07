@@ -7,7 +7,7 @@
 #include "myshell.h"
 #include "parser.h"
 #include "buildin.h"
-
+#include "exec.h"
 
 
 char 	pwd[MAXLEN + 1];	/*PWD var*/
@@ -48,8 +48,7 @@ int main(int argc, char *argv[])
 		{
 			continue;
 		}
-		/*Call outside programs*/
-		
+		excute(arg_c,arg);
 	}
 	
 }

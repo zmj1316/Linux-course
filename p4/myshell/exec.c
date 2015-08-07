@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <sys/types.h>
 void excute(int arg_c, char arg[][MAXLEN + 1])
 {
 	pid_t pid;
