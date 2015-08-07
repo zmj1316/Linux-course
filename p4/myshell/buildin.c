@@ -133,10 +133,10 @@ static void b_quit()
 /*show env vars*/
 static void b_env()
 {
-    char cpath[MAXLEN];
-    readlink ("/proc/self/exe", cpath, MAXLEN);
-    fprintf(stdout,"%-10s\t%-20s\n","PWD",pwd);
-    fprintf(stdout,"%-10s\t%-20s\n","SHELL",cpath);
+    for (int i = 0; environ[i]; ++i)
+    {
+        fprintf(stdout, "%s\n", environ[i]);
+    }
 }
 
 /*******************************/

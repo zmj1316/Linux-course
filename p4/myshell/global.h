@@ -9,9 +9,6 @@
 extern char 	pwd[MAXLEN + 1];
 extern char		cmd[MAXLEN + 1];
 extern char		arg[MAXLEN + 1][MAXLEN + 1];
-
-// typedef enum {
-// 	CD,PWD,CLR,DIR,ENV,ECHO,HELP,QUIT
-//   }BuildinType;
+extern char 	**environ;
 
 #endif
