@@ -25,22 +25,9 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 		    int i;
 			for (i = 0; i <= arg_c ; ++i)
 			{
-				if (!strcmp(arg[i],"<"))
-				{
-					if ( freopen(arg[++i],"r",stdin) == NULL )
-						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
-				}
-				if (!strcmp(arg[i],">"))
-				{
-					if( freopen(arg[++i],"w",stdout) == NULL )
-						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
-				}
-				if (!strcmp(arg[i],">>"))
-				{
-					if( freopen(arg[++i],"a",stdout) == NULL )
-						fprintf(stderr, "%s Not Exist!", arg[i - 1]);
-				}
 				arg_temp[i] = arg[i];
+				if (!(strcmp(arg[i],"<") && strcmp(arg[i],">") && strcmp(arg[i],">>")))
+				    break;
 			}
 			if (!strcmp(arg[arg_c],"&")) arg_temp[arg_c]=NULL;
 			arg_temp[i] = NULL;
@@ -49,7 +36,7 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 		else{
 			execlp(arg[0],arg[0],(char*)0);
 		}
-		return;
+		exit(0);
 	}
 	else{
 			/* parent process */

@@ -59,6 +59,26 @@ int main(int argc, char *argv[])
 		fgets(cmd, MAXLEN, IN);	/*Read CMD*/
 		int arg_c = parser(cmd, arg);/*Parse arguments*/
 		/*Check for buildin cmds*/
+		for (int i = 1; i <= arg_c; i++) {
+		    if (!strcmp(arg[i],"<"))
+			{
+			    ++i;
+				if ( freopen(arg[i],"r",stdin) == NULL )
+					fprintf(stderr, "%s Not Exist!", arg[i]);
+			}
+			if (!strcmp(arg[i],">"))
+			{
+			    ++i;
+				if( freopen(arg[i],"w",stdout) == NULL )
+					fprintf(stderr, "%s Not Exist!", arg[i]);
+			}
+			if (!strcmp(arg[i],">>"))
+			{
+			    ++i;
+				if( freopen(arg[i],"a",stdout) == NULL )
+					fprintf(stderr, "%s Not Exist!", arg[i]);
+			}
+		}
 		if (buildin(arg_c,arg))
 		{
 			continue;
