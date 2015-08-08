@@ -50,7 +50,7 @@ int buildin(/*0: Is not a buildin cmd */
         b_quit();
         return 1;
     }
-    if (!strcmp(arg[0],"env"))
+    if (!strcmp(arg[0],"environ"))
     {
         b_env();
         return 1;
@@ -64,7 +64,7 @@ static void b_cd ( /*run cd cmd*/
 {
 	if (dst[0] != 0){
 		if (!chdir(dst)){
-		    strcpy(pwd, dst); /* update the current work director */
+		    getcwd(pwd,MAXLEN); /* update the current work director */
 		}
 			
 		else{

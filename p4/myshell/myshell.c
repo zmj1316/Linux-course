@@ -39,6 +39,11 @@ int main(int argc, char *argv[])
         getpwd();
 		fprintf(stdout,"%s>", pwd);	/*Print promote*/
 		fflush(stdin);
+		/*Add environ*/
+		char shell[MAXLEN]="shell=";	/*Parent environ var */
+	    strcat(shell,pwd);				
+	    strcat(shell,"/myshell");
+	    putenv(shell);
 		/* Wait for user to input from stdin */
 		if (argc == 1)
 		{

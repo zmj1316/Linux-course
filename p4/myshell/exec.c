@@ -12,7 +12,7 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 	char *arg_temp[MAXLEN + 1]; 	/*Array of arguments*/
 	char parent[MAXLEN]="parent=";	/*Parent environ var */
 	strcat(parent,pwd);				
-	strcat(parent,"myshell");
+	strcat(parent,"/myshell");
 	/*Append parent to environ*/
 	putenv(parent);
 
