@@ -45,7 +45,7 @@ int buildin(/*0: Is not a buildin cmd */
 	}
 	if (!strcmp(arg[0],"dir"))
 	{
-        b_dir();
+        b_dir(arg[1]);
         return 1;
 	}
     if (!strcmp(arg[0],"echo"))
@@ -107,9 +107,9 @@ static void b_clr()
 }
 
 /*show files in the directory*/
-static void b_dir()
+static void b_dir(char * dir)
 {
-	b_ls(".");
+	b_ls(dir);
 }
 
 /*echo messages on screen*/
