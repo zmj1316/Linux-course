@@ -17,7 +17,10 @@ int buildin(/*0: Is not a buildin cmd */
     /*compare cmds*/
 	if (!strcmp(arg[0],"cd"))
 	{
-		b_cd(arg[1]);
+	    if (arg_c)
+		    b_cd(arg[1]);
+		else
+		    b_pwd();
 		return 1;
 	}
 	if (!strcmp(arg[0],"pwd"))
@@ -70,11 +73,11 @@ static void b_cd ( /*run cd cmd*/
 		else{
 			/* error process */
 			if (errno == ENOENT){
-				fprintf(stdout, "ddsh: cd: %s: No such file or directory\n", dst);
+				fprintf(stdout, "mysh: cd: %s: No such file or directory\n", dst);
 				errno = 0; /* resume */
 			}
 			else if (errno == ENOTDIR){
-				fprintf(stdout, "ddsh: cd: %s: Not a directory\n", dst);
+				fprintf(stdout, "mysh: cd: %s: Not a directory\n", dst);
 				errno = 0;
 			}
 		}
@@ -116,11 +119,11 @@ static void b_echo(
 /*print help message with more*/
 static void b_help()
 {
-    FILE *fp = fopen("help.txt","r");
+    FILE *fp = fopen("Readme","r");
     if (fp==NULL)
     {
         fprintf(stderr,"Manual not exist!\n");
-        exit(1);
+        return 1;
     }
     b_more(fp);
 }
