@@ -11,4 +11,4 @@ extern char		cmd[MAXLEN + 1];
 extern char		arg[MAXLEN + 1][MAXLEN + 1];
 extern char 	**environ;
 
-#endif
+#endif /* GLOBAL_H */

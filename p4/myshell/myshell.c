@@ -1,3 +1,9 @@
+/*
+ * (C) 2015 Key Zhang
+ * @myshell.c
+ * @Feature: The entrance of this program, deal with the
+ * 	I/O including redirect. And environ setup.
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

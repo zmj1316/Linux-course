@@ -1,9 +1,19 @@
+/*
+ * (C) 2015 Key Zhang
+ * @buildin.c
+ * @Feature: To run buildin commands like : cd pwd clr ...
+ */
 #include "buildin.h"
 #include <stdio.h>
 #include <string.h>
 #include <dirent.h>
 #include <errno.h>
 #include <time.h>
+
+/*Help string*/
+char *Help[]={
+    "help:"
+}
 /*get file stat*/
 int stat(const char *path, struct stat *buf);
 

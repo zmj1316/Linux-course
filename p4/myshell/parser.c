@@ -1,3 +1,8 @@
+/*
+ * (C) 2015 Key Zhang
+ * @parser.c
+ * @Feature: To turn a string of arguments into a array.
+ */
 #include "global.h"
 #include "parser.h"
 /*Parse the commands*/

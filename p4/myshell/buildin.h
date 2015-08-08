@@ -1,3 +1,8 @@
+/*
+ * (C) 2015 Key Zhang
+ * @buildin.h
+ * @Feature: To run buildin commands like : cd pwd clr ...
+ */
 #ifndef BUILDIN_H
 #define BUILDIN_H 
 #include "global.h"
@@ -24,4 +29,5 @@ void dostat(char *);
 void show_file_info(char *,struct stat *);
 void mode_to_letters(int mode,char str[]);
 // uid gid to name group
-#endif
+
+#endif /* BUILDIN_H */

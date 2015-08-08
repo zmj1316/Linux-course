@@ -1,3 +1,8 @@
+/* 
+ * (C) 2015 Key Zhang		
+ * @exec.c 
+ * @Feature: To execute external programs.
+ */
 #include "exec.h"
 #include "global.h"
 #include <stdio.h>
