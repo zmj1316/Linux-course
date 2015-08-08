@@ -193,7 +193,7 @@ static void b_ls(char dirname[])
     DIR *dir_ptr;   /*The directory to read*/
     struct dirent *direntp; /*The dir info struct*/
     if((dir_ptr = opendir(dirname)) == NULL)    /* Try to open the dir*/
-        fprintf(stderr,"ls1:cannot open %s\n",dirname);
+        fprintf(stderr,"ls:cannot open %s\n",dirname);
     else
     {
         while((direntp = readdir(dir_ptr)) != NULL) /* Read the dir info */
@@ -245,13 +245,13 @@ void show_file_info(char *filename,struct stat *info_p)
 {
     char modestr[11]; /* String of the mode */
     mode_to_letters(info_p->st_mode,modestr);
-    printf("%s",modestr);
-    printf("%4d ",(int)info_p->st_nlink);
-    printf("%-8s",uid_to_name(info_p->st_uid));
-    printf("%-8s",gid_to_name(info_p->st_gid));
-    printf("%8ld",(long)info_p->st_size);
-    printf(" %.12s",4+ctime(&(info_p->st_mtime)));
-    printf(" %s\n",filename);
+    fprintf(stdout, "%s",modestr);
+    fprintf(stdout, "%2d ",(int)info_p->st_nlink);
+    fprintf(stdout, "%-7s",uid_to_name(info_p->st_uid));
+    fprintf(stdout, "%-7s",gid_to_name(info_p->st_gid));
+    fprintf(stdout, "%5ld",(long)info_p->st_size);
+    fprintf(stdout, " %.12s",4+ctime(&(info_p->st_mtime)));
+    fprintf(stdout, " %s\n",filename);
 }
  
 /* Turn authority to str */

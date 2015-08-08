@@ -43,8 +43,6 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 		    int status;
 		    /* Remove parent env*/
 		    unsetenv("parent");
-		    freopen("/dev/tty", "r", stdin);
-		    freopen("/dev/tty","w",stdout);
 		    /* Background process */
 		    if (!strcmp(arg[arg_c],"&"))
 		        return;

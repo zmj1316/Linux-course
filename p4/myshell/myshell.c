@@ -70,20 +70,22 @@ int main(int argc, char *argv[])
 			{
 			    ++i;
 				if( freopen(arg[i],"w",stdout) == NULL )
-					fprintf(stderr, "%s Not Exist!", arg[i]);
+					fprintf(stderr, "%s Access Denied!", arg[i]);
 			}
 			if (!strcmp(arg[i],">>"))
 			{
 			    ++i;
 				if( freopen(arg[i],"a",stdout) == NULL )
-					fprintf(stderr, "%s Not Exist!", arg[i]);
+					fprintf(stderr, "%s Access Denied!", arg[i]);
 			}
 		}
-		if (buildin(arg_c,arg))
+		if (!buildin(arg_c,arg))
 		{
-			continue;
+			excute(arg_c,arg);
 		}
-		excute(arg_c,arg);
+		fflush(stdout);
+		freopen("/dev/tty","r",stdin);
+		freopen("/dev/tty","w",stdout);
 	}
 	
 }
