@@ -13,7 +13,7 @@
 /*Help string*/
 char *Help[]={
     "help:"
-}
+};
 /*get file stat*/
 int stat(const char *path, struct stat *buf);
 
@@ -45,7 +45,10 @@ int buildin(/*0: Is not a buildin cmd */
 	}
 	if (!strcmp(arg[0],"dir"))
 	{
-        b_dir(arg[1]);
+	    if (arg_c > 0)
+            b_dir(arg[1]);
+        else
+            b_dir(".");
         return 1;
 	}
     if (!strcmp(arg[0],"echo"))
@@ -210,16 +213,22 @@ static void b_ls(char dirname[])
     else
     {
         while((direntp = readdir(dir_ptr)) != NULL) /* Read the dir info */
-                dostat(direntp->d_name); /* */
+            dostat(direntp->d_name, dirname); /* */
         closedir(dir_ptr);  /* Close the dir */
     }
 }
  
 /* Analyse the file/dir */
-void dostat(char *filename)
+void dostat(char *filename, char *dir)
 {
     struct stat info;
-    if(stat(filename,&info) == -1)
+    /* Turn filename into pathname*/
+    char buf[MAXLEN] = "";
+    strcat(buf,dir);
+    if (buf[strlen(buf) -1] != '/') /* add '/' if not appended*/
+        strcat(buf,"/");
+    strcat(buf,filename);   /* Append filename */
+    if(stat(buf,&info) == -1)
         perror(filename);
     else
         show_file_info(filename,&info);

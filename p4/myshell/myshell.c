@@ -41,33 +41,35 @@ void getpwd()
 
 int main(int argc, char *argv[]) 
 {
-	while(1){
-        getpwd();
-		fprintf(stdout,"%s>", pwd);	/*Print promote*/
-		fflush(stdin);
-		/*Add environ*/
-		char shell[MAXLEN]="shell=";	/*Parent environ var */
-	    strcat(shell,pwd);				
-	    strcat(shell,"/myshell");
-	    putenv(shell);
-		/* Wait for user to input from stdin */
-		if (argc == 1)
+    /* Wait for user to input from stdin */
+    if (argc == 1)
 		{
 			INPUT = STD;
 			IN = stdin; 
 		}
 		/* Else from the script file */
-		else
+	else
+	{
+		INPUT = FIL;
+		IN = fopen(argv[1], "r");
+		if (IN == NULL)
 		{
-			INPUT = FIL;
-			IN = fopen(argv[1], "r");
-			if (IN == NULL)
-			{
-				fprintf(stderr, "File %s not found\n", argv[1]);
-				exit(1);
-			}
+			fprintf(stderr, "File %s not found\n", argv[1]);
+			exit(1);
 		}
-		fgets(cmd, MAXLEN, IN);	/*Read CMD*/
+	}
+	while(1){
+        getpwd();
+		/*Add environ*/
+		char shell[MAXLEN]="shell=";	/*Parent environ var */
+	    strcat(shell,pwd);				
+	    strcat(shell,"/myshell");
+	    putenv(shell);
+		if (INPUT == STD)
+		    fprintf(stdout,"%s>", pwd);	/*Print promote*/
+		fflush(stdin);
+		if ( !fgets(cmd, MAXLEN, IN) )	/*Read CMD*/
+		    return 0;
 		int arg_c = parser(cmd, arg);/*Parse arguments*/
 		/* I/O redirect */
 		for (int i = 1; i <= arg_c; i++) {

@@ -13,7 +13,7 @@ int parser(
 	int i = 0;
 	int b = 0;
 	char c;	
-	while ((c = *CMD++) == ' ') ; /*Skip leading spaces
+	while ((c = *CMD++) == ' ') ; /*Skip leading spaces*/
 	while (c != 0 && c != '\n') /*Stop while reach NULL or Enter*/
 	{
 	    if (c == '\\')	/* Escape */

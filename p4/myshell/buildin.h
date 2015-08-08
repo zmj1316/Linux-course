@@ -25,7 +25,7 @@ static void b_more();
 static void b_quit();
 static void b_env();
 static int see_more();
-void dostat(char *);
+void dostat(char *, char *);
 void show_file_info(char *,struct stat *);
 void mode_to_letters(int mode,char str[]);
 // uid gid to name group

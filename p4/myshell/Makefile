@@ -1,6 +1,6 @@
 CC = gcc -std=c99 -w
 myshell: myshell.o parser.o buildin.o exec.o
-	$(CC) myshell.o parser.o buildin.o exec.o -o main 
+	$(CC) myshell.o parser.o buildin.o exec.o -o myshell 
 myshell.o: myshell.c parser.o buildin.o myshell.h
 	$(CC) -c myshell.c
 parser.o: parser.c parser.h
