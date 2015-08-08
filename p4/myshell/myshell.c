@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 		}
 		fgets(cmd, MAXLEN, IN);	/*Read CMD*/
 		int arg_c = parser(cmd, arg);/*Parse arguments*/
-		/*Check for buildin cmds*/
+		/* I/O redirect */
 		for (int i = 1; i <= arg_c; i++) {
 		    if (!strcmp(arg[i],"<"))
 			{
@@ -90,13 +90,15 @@ int main(int argc, char *argv[])
 					fprintf(stderr, "%s Access Denied!", arg[i]);
 			}
 		}
+		/* Try to run buildin cmds */
 		if (!buildin(arg_c,arg))
 		{
+			/* Run external cmds*/
 			excute(arg_c,arg);
 		}
 		fflush(stdout);
+		/* Recover the stdio from redirect */
 		freopen("/dev/tty","r",stdin);
 		freopen("/dev/tty","w",stdout);
 	}
-	
 }

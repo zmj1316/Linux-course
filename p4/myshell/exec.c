@@ -53,7 +53,7 @@ void excute(int arg_c, char arg[][MAXLEN + 1])
 		        return;
 		    /* Wait for the child process */
 			if ((pid == waitpid(pid, &status, 0)) < 0) 
-				fprintf(stderr, "waitpid error...");
+				fprintf(stderr, "Wait error.");
 			return;
 	}
 }

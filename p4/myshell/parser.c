@@ -12,18 +12,18 @@ int parser(
 {
 	int i = 0;
 	int b = 0;
-	char c;
-	while ((c = *CMD++) == ' ') ; /*Skip leading spaces*/
+	char c;	
+	while ((c = *CMD++) == ' ') ; /*Skip leading spaces
 	while (c != 0 && c != '\n') /*Stop while reach NULL or Enter*/
 	{
-	    if (c == '\\')
+	    if (c == '\\')	/* Escape */
 	    {
 	        c = *CMD++;
 	        arg[i][b++] = c;
 	        c = *CMD++;
 	        continue;
 	    }
-		if (c == ' ' || c =='\t')
+		if (c == ' ' || c =='\t') /* Splite */
 		{
 			arg[i][b++] = 0; /*End of string*/
 			b = 0;
