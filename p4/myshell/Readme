@@ -1,4 +1,26 @@
 ##Myshell
+###Basic commands
+####cd <directory>
+Change the current directory.
+
+####clr
+Clean the screen.
+
+####dir <directory>
+List the files under directory.
+
+####environ
+Print the environment variables.
+
+####echo <comment>
+Print comment on screen.
+
+####help
+Show help messages.
+
+####quit
+Quit myshell
+
 ###I/O Redirect 
 ####Intro
 There are always three default files open, `stdin` (the keyboard), `stdout` (the screen), and `stderr` (error messages output to the screen). These, and any other open files, can be redirected. Redirection simply means capturing output from a file, command, program, script, or even code block within a script and sending it as input to another file, command, program, or script.
