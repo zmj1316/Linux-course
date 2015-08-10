@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	while(1){
         getpwd();
 		/*Add environ*/
-		char shell[MAXLEN]="shell=";	/*Parent environ var */
+		char shell[MAXLEN]="shell=";	/*Shell environ var */
 	    strcat(shell,pwd);				
 	    strcat(shell,"/myshell");
 	    putenv(shell);
